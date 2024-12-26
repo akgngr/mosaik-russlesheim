@@ -1,0 +1,94 @@
+---
+// footer
+// @ts-ignore
+import { Icon } from "astro-icon/components"
+import Card from "./card.astro"
+import Flink from "./f_link.astro"
+import BottomFooter from "./bottom_footer.astro"
+---
+
+<footer class="bg-[#004a7d] pb-6 pt-10 text-fluid">
+  <div
+    class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4 w-11/12 md:w-10/12 mx-auto"
+  >
+    <Card title="Über Uns">
+      <img src="mosaikevlogo.png" alt="Logo" class="w-1/2 mb-4" />
+      <p>
+        Der Verein Mosaik Dialog und Kultur e.V. in Rüsselsheim fördert Bildung,
+        Jugendarbeit und interkulturellen Dialog durch Sprachkurse, Nachhilfe
+        und kulturelle Aktivitäten.
+      </p>
+      <div class="mt-6">
+        <h3 class="text-3xl font-semibold mb-3">Bürozeiten</h3>
+        <div class="w-14 bg-white h-1.5 mb-6"></div>
+        <p>Mon. – Frei. 10:00–17:00 Uhr</p>
+      </div>
+    </Card>
+    <Card title="Offiziell">
+      <ul>
+        <li>
+          <Flink url="#">Über Uns</Flink>
+        </li>
+        <li>
+          <Flink url="#">Datenschutzerklärung</Flink>
+        </li>
+        <li>
+          <Flink url="#">Impressum</Flink>
+        </li>
+        <li>
+          <Flink url="#">Kontakt</Flink>
+        </li>
+      </ul>
+    </Card>
+    <Card title="Kontakt">
+      <ul class="space-y-2">
+        <li><strong>Telefon:</strong> 0179-7051273</li>
+        <li><strong>E-Mail:</strong> kontakt@mosaik-ruesselsheim.de</li>
+        <li><strong>Adress:</strong> BahnhofStr. 20, 60547 Rüsselsheim</li>
+      </ul>
+      <div class="flex gap-4 mt-6">
+        <a
+          class="transition duration-700 ease-in-out hover:scale-125"
+          href="https://www.facebook.com/mosaikruesselsheim"
+          target="_blank"
+        >
+          <Icon
+            name="facebook"
+            class="w-10 h-10 font-bold fill-white hover:duration-700"
+          />
+        </a>
+        <a
+          class="transition duration-700 ease-in-out hover:scale-125"
+          href="https://www.instagram.com/mosaikruesselsheim"
+          target="_blank"
+        >
+          <Icon
+            name="instagram"
+            class="w-10 h-10 font-bold fill-white hover:duration-700"
+          />
+        </a>
+        <a
+          class="transition duration-700 ease-in-out hover:scale-125"
+          href="https://www.youtube.com/channel/UCODuRWxvi22iFNEwEEpVaLg"
+          target="_blank"
+        >
+          <Icon
+            name="youtube"
+            class="w-10 h-10 font-bold fill-white hover:duration-700"
+          />
+        </a>
+        <a
+          class="transition duration-700 ease-in-out hover:scale-125"
+          href="https://x.com/MosaikDialog"
+          target="_blank"
+        >
+          <Icon
+            name="twitter"
+            class="w-10 h-10 font-bold fill-white hover:duration-700"
+          />
+        </a>
+      </div>
+    </Card>
+  </div>
+  <BottomFooter />
+</footer>

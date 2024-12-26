@@ -1,0 +1,21 @@
+---
+import BtnTransparent from "../btn_transparent.astro"
+const { title, desc, img } = Astro.props
+---
+
+<div
+  class="absolute w-full h-full transition-opacity duration-500"
+  data-slide="1"
+>
+  <img src={img} alt="Slide 1" class="object-cover w-full h-full" />
+  <div class="absolute inset-0 bg-black opacity-50"></div>
+  <div
+    class="absolute bottom-0 left-0 p-10 space-y-4 bg-[#006ab3] w-1/3 h-60 bg-opacity-90 text-white"
+  >
+    <h2 class="text-5xl font-semibold">{title}</h2>
+    <p class="text-lg">{desc}</p>
+    <div class="relative w-1/2">
+      <BtnTransparent url="#">Mehr erfahren</BtnTransparent>
+    </div>
+  </div>
+</div>

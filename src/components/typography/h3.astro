@@ -1,0 +1,8 @@
+---
+// H3 Typography Style
+const { clss } = Astro.props
+---
+
+<h3 class:list={["text-4xl", " font-semibold", " text-[#2c2c2c]", clss]}>
+  <slot />
+</h3>

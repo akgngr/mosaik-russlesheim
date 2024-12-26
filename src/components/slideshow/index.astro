@@ -1,0 +1,62 @@
+---
+import PrevBtn from "./prev_btn.astro"
+import NextBtn from "./next_btn.astro"
+import Slide from "./slide.astro"
+---
+
+<div class="relative w-full h-[calc(100vh-120px)] overflow-hidden">
+  <div id="slides" class="relative w-full h-full">
+    <Slide
+      title="Slide 1"
+      desc="Description 1"
+      img="/slide1.jpg"
+      data-slide="1"
+    />
+    <Slide
+      title="Slide 2"
+      desc="Description 2"
+      img="/Kooperation-mit-Projekt-auf.jpg"
+      class="opacity-0"
+      data-slide="2"
+    />
+  </div>
+  <div class="absolute bottom-4 right-0 -translate-x-1/2 flex space-x-2">
+    <PrevBtn />
+    <NextBtn />
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const slides = document.querySelectorAll("#slides > div")
+    const prevButton = document.getElementById("prev")
+    const nextButton = document.getElementById("next")
+    let currentSlide = 0
+    //@ts-ignore
+    function showSlide(n) {
+      slides.forEach((slide, index) => {
+        //@ts-ignore
+        slide.style.opacity = index === n ? 1 : 0
+      })
+    }
+
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % slides.length
+      showSlide(currentSlide)
+    }
+
+    function prevSlide() {
+      currentSlide = (currentSlide - 1 + slides.length) % slides.length
+      showSlide(currentSlide)
+    }
+
+    showSlide(currentSlide) // İlk slaydı göster
+    //@ts-ignore
+    nextButton.addEventListener("click", nextSlide)
+    //@ts-ignore
+    prevButton.addEventListener("click", prevSlide)
+
+    // Otomatik geçiş (isteğe bağlı)
+    setInterval(nextSlide, 5000) // 5 saniyede bir geçiş
+  })
+</script>

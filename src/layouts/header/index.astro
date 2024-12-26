@@ -1,0 +1,28 @@
+---
+//Header
+
+import Link from "./link.astro"
+---
+
+<header class="w-full">
+  <div class="md:w-10/12 w-11/12 m-auto py-8 flex justify-between items-center">
+    <div>
+      <img src="/mosaikevlogo.png" alt="Logo" class="w-auto h-14" />
+    </div>
+    <div class="flex gap-6 items-center">
+      <ul class="flex gap-4">
+        <li><Link url="#">Home</Link></li>
+        <li><Link url="#">Über Uns</Link></li>
+        <li><Link url="#">Projekt</Link></li>
+        <li><Link url="#">Aktivität</Link></li>
+        <li><Link url="#">Flüchtlingshilfe</Link></li>
+        <li><Link url="#">Kontakt</Link></li>
+      </ul>
+      <a
+        href="#spende"
+        class="bg-[#006ab3] text-white hover:text-[#006ab3] hover:bg-white border-4 border-[#006ab3] rounded-xl font-semibold px-4 py-2 focus:outline-none focus:ring-2 focus:ring-gray-700 focus:ring-opacity-75 hover:duration-700"
+        >Spenden</a
+      >
+    </div>
+  </div>
+</header>

@@ -1,0 +1,18 @@
+---
+// @ts-ignore
+import { Icon } from "astro-icon/components"
+
+const { url } = Astro.props
+---
+
+<a href={url} class="group flex gap-2 justify-left items-center space-x-2">
+  <span
+    class="transform group-hover:duration-700 transition-transform group-hover:translate-x-3"
+  >
+    <Icon
+      name="chevronRight"
+      class="w-7 h-7 font-bold fill-inherit hover:duration-700 hover:pl-2"
+    />
+  </span>
+  <slot />
+</a>

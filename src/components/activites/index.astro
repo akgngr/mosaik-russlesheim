@@ -1,0 +1,16 @@
+---
+import H3 from "../typography/h3.astro"
+import Card from "./card.astro"
+---
+
+<section class="bg-[#cee2ef]">
+  <div class="w-11/12 md:w-10/12 mx-auto py-10">
+    <H3 clss="py-6">Aktivitäten</H3>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <Card title="Kurse" url="#kurse" svg="course" />
+      <Card title="Jugendarbeit" url="#jugendarbeit" svg="cup" />
+      <Card title="Flüchtlingshilfe" url="#fluchtlingshilfe" svg="help" />
+      <Card title="Dialog" url="#dialog" svg="dialog" />
+    </div>
+  </div>
+</section>

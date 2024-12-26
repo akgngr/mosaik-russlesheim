@@ -1,0 +1,19 @@
+---
+//@ts-ignore
+import { Icon } from "astro-icon/components"
+
+const { url, svg, title } = Astro.props
+---
+
+<a
+  href={url}
+  class="group flex flex-col gap-6 justify-left items-center p-24 space-x-2 bg-gray-50 hover:bg-[#006ab3] hover:text-white transform duration-700"
+>
+  <div>
+    <Icon
+      name={svg}
+      class="w-24 h-24 text-[#006ab3] group-hover:text-white transform group-hover:duration-700"
+    />
+  </div>
+  <h3 class="text-xl font-semibold uppercase">{title}</h3>
+</a>

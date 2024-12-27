@@ -6,7 +6,10 @@ import Card from "./card.astro"
 <section class="bg-[#cee2ef]">
   <div class="w-11/12 md:w-10/12 mx-auto py-10">
     <H3 clss="py-6">Aktivitäten</H3>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div
+      data-carousel
+      class="flex md:grid md:grid-cols-2 lg:grid-cols-4 overflow-x-scroll snap-x snap-mandatory whitespace-nowrap scrollbar-hide gap-4"
+    >
       <Card title="Kurse" url="#kurse" svg="course" />
       <Card title="Jugendarbeit" url="#jugendarbeit" svg="cup" />
       <Card title="Flüchtlingshilfe" url="#fluchtlingshilfe" svg="help" />
@@ -14,3 +17,56 @@ import Card from "./card.astro"
     </div>
   </div>
 </section>
+
+<style>
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+    scrollbar-width: none; /* Firefox */
+  }
+
+  .snap-x {
+    scroll-snap-type: x mandatory;
+  }
+
+  .snap-center {
+    scroll-snap-align: center;
+  }
+
+  .overflow-x-scroll {
+    overflow-x: scroll;
+    overflow-y: hidden;
+  }
+</style>
+
+<script>
+  const carousel = document.querySelectorAll("[data-carousel]")
+
+  let startX = ""
+  let scrollLeft = ""
+
+  carousel.addEventListener("touchstart", (e) => {
+    startX = e.touches[0].pageX
+    scrollLeft = carousel.scrollLeft
+  })
+
+  carousel.addEventListener("touchmove", (e) => {
+    const x = e.touches[0].pageX
+    const walk = startX - x // Parmağın ne kadar hareket ettiğini hesaplar
+    carousel.scrollLeft = scrollLeft + walk
+  })
+
+  carousel.addEventListener("touchend", () => {
+    // Kaydırma sonrasında en yakın "snap point"e hizalama
+    const children = Array.from(carousel.children)
+    const scrollLeft = carousel.scrollLeft
+    const closest = children.reduce((prev, curr) => {
+      const currOffset = Math.abs(curr.offsetLeft - scrollLeft)
+      const prevOffset = Math.abs(prev.offsetLeft - scrollLeft)
+      return currOffset < prevOffset ? curr : prev
+    })
+    closest.scrollIntoView({ behavior: "smooth" })
+  })
+</script>

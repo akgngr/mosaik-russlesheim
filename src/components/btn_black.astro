@@ -3,13 +3,17 @@
 import { Icon } from "astro-icon/components"
 // Transparent background button and black border
 
-const { url } = Astro.props
+const { url, icon = true } = Astro.props
 ---
 
 <a
   href={url}
   class="flex gap-2 justify-center items-center font-heading uppercase text-[#006ab3] border-2 border-[#006ab3] py-2 px-4 bg-transparent font-semibold focus:outline-none focus:ring-2 focus:ring-gray-700 focus:ring-opacity-75 hover:bg-[#006ab3] hover:duration-700 hover:text-white"
 >
-  <Icon name="arrowRight" class="w-7 h-7 font-bold fill-inherit" />
+  {
+    icon ? (
+      <Icon name="arrowRight" class="w-7 h-7 font-bold fill-inherit" />
+    ) : null
+  }
   <slot />
 </a>

@@ -1,14 +1,83 @@
 ---
 //Header
-
+// @ts-ignore
+import { Icon } from "astro-icon/components"
 import Link from "./link.astro"
+import BtnBlack from "../../components/btn_black.astro"
 ---
 
 <header class="w-full">
   <div class="md:w-10/12 w-11/12 m-auto py-8 flex justify-between items-center">
     <div>
-      <img src="/mosaikevlogo.png" alt="Logo" class="w-auto h-14" />
+      <img src="/mosaikevlogo.png" alt="Logo" class="w-auto md:h-14 h-10" />
     </div>
+    <!-- Mobile Navigation -->
+    <div class="absolute right-0 top-7 z-1 h-auto">
+      <!-- Menü Butonu -->
+      <button id="menu-button" class="hamburger lg:hidden block">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+      </button>
+    </div>
+    <!-- Menü İçeriği -->
+    <div
+      id="menu"
+      class="absolute top-28 left-0 z-20 bg-gray-100 transform transition-transform duration-200 hidden -translate-y-4 h-screen w-screen"
+    >
+      <nav class="flex flex-col gap-4 p-6">
+        <Link url="#">Home</Link>
+        <Link url="#">Über Uns</Link>
+        <Link url="#">Projekt</Link>
+        <Link url="#">Aktivität</Link>
+        <Link url="#">Flüchtlingshilfe</Link>
+        <Link url="#">Kontakt</Link>
+        <BtnBlack url="#">Spenden</BtnBlack>
+        <div class="flex gap-4 mt-6">
+          <BtnBlack
+            icon={false}
+            url="https://www.facebook.com/mosaikruesselsheim"
+            target="_blank"
+          >
+            <Icon
+              name="facebook"
+              class="w-8 h-8 font-bold fill-white hover:duration-700"
+            />
+          </BtnBlack>
+          <BtnBlack
+            icon={false}
+            url="https://www.instagram.com/mosaikruesselsheim"
+            target="_blank"
+          >
+            <Icon
+              name="instagram"
+              class="w-8 h-8 font-bold fill-white hover:duration-700"
+            />
+          </BtnBlack>
+          <BtnBlack
+            icon={false}
+            url="https://www.youtube.com/channel/UCODuRWxvi22iFNEwEEpVaLg"
+            target="_blank"
+          >
+            <Icon
+              name="youtube"
+              class="w-8 h-8 font-bold fill-white hover:duration-700"
+            />
+          </BtnBlack>
+          <BtnBlack
+            icon={false}
+            url="https://x.com/MosaikDialog"
+            target="_blank"
+          >
+            <Icon
+              name="twitter"
+              class="w-8 h-8 font-bold fill-white hover:duration-700"
+            />
+          </BtnBlack>
+        </div>
+      </nav>
+    </div>
+    <!-- Navigation -->
     <div class="lg:flex hidden gap-6 items-center">
       <ul class="flex gap-4">
         <li><Link url="#">Home</Link></li>
@@ -26,3 +95,85 @@ import Link from "./link.astro"
     </div>
   </div>
 </header>
+
+<script>
+  const menuButton = document.getElementById("menu-button") as HTMLButtonElement
+  const menu = document.getElementById("menu") as HTMLDivElement
+
+  if (menuButton && menu) {
+    menuButton.addEventListener("click", () => {
+      const isHidden = menu.classList.contains("hidden")
+
+      if (isHidden) {
+        menu.classList.remove("hidden")
+        document.body.style.overflow = "hidden"
+      } else {
+        menu.classList.add("hidden")
+        document.body.style.overflow = ""
+      }
+    })
+  }
+
+  menuButton.addEventListener("click", () => {
+    menuButton.classList.toggle("active")
+    menu.classList.toggle("active") // Menüyü aç/kapa
+  })
+</script>
+
+<style>
+  @keyframes slideIn {
+    from {
+      transform: translateX(100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slideOut {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(100%);
+    }
+  }
+
+  .menu-enter {
+    animation: slideIn 300ms ease-in-out forwards;
+  }
+
+  .menu-exit {
+    animation: slideOut 300ms ease-in-out forwards;
+  }
+  nav a {
+    border-bottom: 1px solid gray;
+    padding-bottom: 2px;
+  }
+
+  .hamburger {
+    cursor: pointer;
+    padding: 10px; /* İkonun etrafında boşluk */
+  }
+
+  .line {
+    width: 25px;
+    height: 3px;
+    background-color: #000; /* Çizgi rengi */
+    margin: 5px 0;
+    transition: 0.4s; /* Geçiş efekti */
+  }
+
+  /* Menü açık olduğunda uygulanacak stiller */
+  .hamburger.active .line:nth-child(1) {
+    transform: rotate(-45deg) translate(-5px, 6px);
+  }
+
+  .hamburger.active .line:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hamburger.active .line:nth-child(3) {
+    transform: rotate(45deg) translate(-5px, -6px);
+  }
+</style>

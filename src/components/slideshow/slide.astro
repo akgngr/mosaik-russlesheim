@@ -10,11 +10,11 @@ const { title, desc, img } = Astro.props
   <img src={img} alt="Slide 1" class="object-cover w-full h-full" />
   <div class="absolute inset-0 bg-black opacity-50"></div>
   <div
-    class="absolute bottom-0 left-0 p-10 space-y-4 bg-[#006ab3] w-1/3 h-60 bg-opacity-90 text-white"
+    class="absolute bottom-0 left-0 p-10 space-y-4 bg-[#006ab3] md:w-1/3 w-full h-60 bg-opacity-90 text-white"
   >
-    <h2 class="text-5xl font-semibold">{title}</h2>
-    <p class="text-lg">{desc}</p>
-    <div class="relative w-1/2">
+    <h2 class="lg:text-5xl md:text-4xl text-2xl font-semibold">{title}</h2>
+    <p class="md:text-lg text-base">{desc}</p>
+    <div class="relative md:w-1/2 w-full">
       <BtnTransparent url="#">Mehr erfahren</BtnTransparent>
     </div>
   </div>

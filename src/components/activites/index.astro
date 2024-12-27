@@ -1,5 +1,6 @@
 ---
 import H3 from "../typography/h3.astro"
+//@ts-ignore
 import Card from "./card.astro"
 ---
 
@@ -40,33 +41,3 @@ import Card from "./card.astro"
     overflow-y: hidden;
   }
 </style>
-
-<script>
-  const carousel = document.querySelectorAll("[data-carousel]")
-
-  let startX = ""
-  let scrollLeft = ""
-
-  carousel.addEventListener("touchstart", (e) => {
-    startX = e.touches[0].pageX
-    scrollLeft = carousel.scrollLeft
-  })
-
-  carousel.addEventListener("touchmove", (e) => {
-    const x = e.touches[0].pageX
-    const walk = startX - x // Parmağın ne kadar hareket ettiğini hesaplar
-    carousel.scrollLeft = scrollLeft + walk
-  })
-
-  carousel.addEventListener("touchend", () => {
-    // Kaydırma sonrasında en yakın "snap point"e hizalama
-    const children = Array.from(carousel.children)
-    const scrollLeft = carousel.scrollLeft
-    const closest = children.reduce((prev, curr) => {
-      const currOffset = Math.abs(curr.offsetLeft - scrollLeft)
-      const prevOffset = Math.abs(prev.offsetLeft - scrollLeft)
-      return currOffset < prevOffset ? curr : prev
-    })
-    closest.scrollIntoView({ behavior: "smooth" })
-  })
-</script>

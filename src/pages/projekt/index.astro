@@ -7,7 +7,8 @@ import imageUrlBuilder from "@sanity/image-url"
 import type { SanityImageSource } from "@sanity/image-url/lib/types/types"
 import H1 from "../../components/typography/h1.astro"
 // Sayfa ve gönderi sayısı ayarları
-const pageParam = Astro.url.searchParams.get("page")
+//@ts-ignore
+const pageParam = Astro.request.url.searchParams.get("page")
 const currentPage = pageParam ? Math.max(1, parseInt(pageParam, 10)) : 1
 console.log("Sanity page: " + currentPage)
 const postsPerPage = 12

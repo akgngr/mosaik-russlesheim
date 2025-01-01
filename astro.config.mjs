@@ -30,7 +30,7 @@ export default defineConfig({
       studioBasePath: '/studio'
     }), react()
   ],
-  output: 'server',
+  output: 'static',
   adapter: cloudflare({
      imageService: 'cloudflare'
   }),

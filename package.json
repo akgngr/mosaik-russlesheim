@@ -1,6 +1,8 @@
 {
   "name": "astro-mosaik-russelsheim",
-  "node": ">=18.0.0",
+  "engines": {
+    "node": ">=16.0.0 <17.0.0"
+  },
   "type": "module",
   "version": "0.0.1",
   "scripts": {

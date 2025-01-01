@@ -24,7 +24,8 @@ export default defineConfig({
     sanity({
       projectId: process.env.PUBLIC_SANITY_PROJECT_ID,
       dataset: process.env.PUBLIC_SANITY_DATASET,
-      useCdn: false, // for static builds
+      useCdn: true, // for static builds
+      withCredentials: false, 
       apiVersion: "2022-03-07",
       studioBasePath: '/studio'
     }), react()

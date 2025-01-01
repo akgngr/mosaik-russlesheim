@@ -6,7 +6,7 @@ import icon from "astro-icon";
 import react from "@astrojs/react";
 import { defineConfig, passthroughImageService } from 'astro/config';
 
-import vercel from "@astrojs/vercel";
+import netlify from '@astrojs/netlify';
 
 dotenv.config();
 
@@ -32,5 +32,6 @@ export default defineConfig({
     }), react()
   ],
 
-  adapter: vercel(),
+   output: 'server',
+    adapter: netlify(),
 });

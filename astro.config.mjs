@@ -6,6 +6,7 @@ import icon from "astro-icon";
 import react from "@astrojs/react";
 import { defineConfig, passthroughImageService } from 'astro/config';
 dotenv.config();
+import cloudflare from '@astrojs/cloudflare';
 
 export default defineConfig({
   image: {
@@ -28,4 +29,8 @@ export default defineConfig({
       studioBasePath: '/studio'
     }), react()
   ],
+  output: 'server',
+  adapter: cloudflare({
+     imageService: 'cloudflare'
+  }),
 });

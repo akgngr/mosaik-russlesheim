@@ -5,6 +5,8 @@ import sanity from "@sanity/astro";
 import icon from "astro-icon";
 import react from "@astrojs/react";
 
+import vercel from "@astrojs/vercel";
+
 dotenv.config();
 
 export default defineConfig({
@@ -20,4 +22,6 @@ export default defineConfig({
       studioBasePath: '/studio'
     }), react()
   ],
+
+  adapter: vercel(),
 });

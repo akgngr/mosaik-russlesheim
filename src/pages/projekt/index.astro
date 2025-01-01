@@ -1,4 +1,5 @@
 ---
+export const prerender = true
 //@ts-ignore
 import { sanityClient } from "sanity:client"
 import MainLayout from "../../layouts/MainLayout.astro"
@@ -8,36 +9,36 @@ import H1 from "../../components/typography/h1.astro"
 
 // Type definitions
 interface Post {
-  _id: string;
-  title: string;
-  slug: { current: string };
-  image?: { asset: { _ref: string } };
-  publishedAt: string;
+  _id: string
+  title: string
+  slug: { current: string }
+  image?: { asset: { _ref: string } }
+  publishedAt: string
 }
 
 interface PaginationData {
-  totalPageCount: number;
-  currentPage: number;
+  totalPageCount: number
+  currentPage: number
 }
 
 // Pagination setup with error handling
-const pageParam = Astro.url.searchParams.get("page");
-const currentPage = Math.max(1, parseInt(pageParam ?? "1", 10));
-const postsPerPage = 12;
-const pageIndex = currentPage - 1;
+const pageParam = Astro.url.searchParams.get("page")
+const currentPage = Math.max(1, parseInt(pageParam ?? "1", 10))
+const postsPerPage = 12
+const pageIndex = currentPage - 1
 
 // Sanity configuration
-const { projectId, dataset } = sanityClient.config();
-const builder = projectId && dataset ? imageUrlBuilder({ projectId, dataset }) : null;
+const { projectId, dataset } = sanityClient.config()
+const builder =
+  projectId && dataset ? imageUrlBuilder({ projectId, dataset }) : null
 
 const urlFor = (source: SanityImageSource) => {
-  if (!builder) return "";
-  return builder.image(source).url();
-};
+  if (!builder) return ""
+  return builder.image(source).url()
+}
 
 // GROQ query with error handling
-try {
-  const query = `{
+const query = `{
     "items": *[_type == "post" && defined(slug.current)] | order(publishedAt desc) [$start...$end] {
       _id,
       title,
@@ -46,97 +47,106 @@ try {
       publishedAt
     },
     "total": count(*[_type == "post" && defined(slug.current)])
-  }`;
+  }`
 
-  const { items: posts, total } = await sanityClient.fetch(query, {
-    start: pageIndex * postsPerPage,
-    end: (pageIndex + 1) * postsPerPage - 1
-  });
+const { items: posts, total } = await sanityClient.fetch(query, {
+  start: pageIndex * postsPerPage,
+  end: (pageIndex + 1) * postsPerPage - 1,
+})
 
-  const totalPages = Math.ceil(total / postsPerPage);
-
+const totalPages = Math.ceil(total / postsPerPage)
 ---
 
 <MainLayout title="Projekte">
   <div class="container mx-auto min-h-[calc(100vh-120px)] w-10/12 py-8">
     <H1>Projekt</H1>
 
-    {!posts || posts.length === 0 ? (
-      <div class="text-center py-10">
-        <p class="text-gray-600">Keine Projekte gefunden.</p>
-      </div>
-    ) : (
-      <ul class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {posts.map((post: Post) => (
-          <li class="hover:shadow-lg transition-shadow duration-200 rounded-lg overflow-hidden">
-            <a href={`/projekt/${post.slug.current}`} class="block">
-              {post.image && (
-                <div class="aspect-video overflow-hidden">
-                  <img
-                    src={urlFor(post.image.asset._ref)}
-                    width="550"
-                    height="310"
-                    alt={post.title}
-                    loading="lazy"
-                    class="w-full h-full object-cover transition-transform duration-200 hover:scale-105"
-                  />
+    {
+      !posts || posts.length === 0 ? (
+        <div class="text-center py-10">
+          <p class="text-gray-600">Keine Projekte gefunden.</p>
+        </div>
+      ) : (
+        <ul class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {posts.map((post: Post) => (
+            <li class="hover:shadow-lg transition-shadow duration-200 rounded-lg overflow-hidden">
+              <a href={`/projekt/${post.slug.current}`} class="block">
+                {post.image && (
+                  <div class="aspect-video overflow-hidden">
+                    <img
+                      src={urlFor(post.image.asset._ref)}
+                      width="550"
+                      height="310"
+                      alt={post.title}
+                      loading="lazy"
+                      class="w-full h-full object-cover transition-transform duration-200 hover:scale-105"
+                    />
+                  </div>
+                )}
+                <div class="p-4">
+                  <h2 class="text-xl font-semibold mb-2">{post.title}</h2>
+                  <p class="text-gray-600 text-sm">
+                    {new Date(post.publishedAt).toLocaleDateString("de-DE", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })}
+                  </p>
                 </div>
-              )}
-              <div class="p-4">
-                <h2 class="text-xl font-semibold mb-2">{post.title}</h2>
-                <p class="text-gray-600 text-sm">
-                  {new Date(post.publishedAt).toLocaleDateString("de-DE", {
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                  })}
-                </p>
-              </div>
-            </a>
-          </li>
-        ))}
-      </ul>
-    )}
+              </a>
+            </li>
+          ))}
+        </ul>
+      )
+    }
 
     {/* Pagination */}
-    {totalPages > 1 && (
-      <div class="flex justify-center gap-4 mt-12">
-        <nav class="flex items-center gap-2" aria-label="Pagination">
-          {currentPage > 1 && (
-            <a
-              href={`/projekt?page=${currentPage - 1}`}
-              class="px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition-colors duration-200"
-            >
-              Zurück
-            </a>
-          )}
+    <Fragment client:only>
+      {
+        totalPages > 1 && (
+          <div class="flex justify-center gap-4 mt-12">
+            <nav class="flex items-center gap-2" aria-label="Pagination">
+              {currentPage > 1 && (
+                <a
+                  href={`/projekt?page=${currentPage - 1}`}
+                  class="px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition-colors duration-200"
+                >
+                  Zurück
+                </a>
+              )}
 
-          <div class="flex gap-2">
-            {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNum) => (
-              <a
-                href={`/projekt?page=${pageNum}`}
-                class={`px-4 py-2 rounded-md transition-colors duration-200 ${
-                  currentPage === pageNum
-                    ? "bg-blue-500 text-white"
-                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                }`}
-                aria-current={currentPage === pageNum ? "page" : undefined}
-              >
-                {pageNum}
-              </a>
-            ))}
+              <div class="flex gap-2">
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map(
+                  (pageNum) => (
+                    <a
+                      href={`/projekt?page=${pageNum}`}
+                      class={`px-4 py-2 rounded-md transition-colors duration-200 ${
+                        currentPage === pageNum
+                          ? "bg-blue-500 text-white"
+                          : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                      }`}
+                      aria-current={
+                        currentPage === pageNum ? "page" : undefined
+                      }
+                    >
+                      {pageNum}
+                    </a>
+                  )
+                )}
+              </div>
+
+              {currentPage < totalPages && (
+                <a
+                  href={`/projekt?page=${currentPage + 1}`}
+                  class="px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition-colors duration-200"
+                >
+                  Weiter
+                </a>
+              )}
+            </nav>
           </div>
-
-          {currentPage < totalPages && (
-            <a
-              href={`/projekt?page=${currentPage + 1}`}
-              class="px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition-colors duration-200"
-            >
-              Weiter
-            </a>
-          )}
-        </nav>
-      </div>
-    )}
+        )
+      }
+    </Fragment>
   </div>
 </MainLayout>

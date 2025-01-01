@@ -1,4 +1,4 @@
-import '../../chunks/page-ssr_Cc0-Qqx_.mjs';
+import '../../chunks/page-ssr_ChuPVj16.mjs';
 import { c as createComponent, r as renderTemplate, e as addAttribute, g as renderHead, b as renderComponent, d as createAstro } from '../../chunks/astro/server_BITgS1cK.mjs';
 /* empty css                                           */
 export { renderers } from '../../renderers.mjs';

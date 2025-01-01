@@ -10,6 +10,9 @@ import vercel from "@astrojs/vercel";
 dotenv.config();
 
 export default defineConfig({
+  image: {
+    domains: ["astro.build"],
+  },
   integrations: [
     icon(),
     tailwind(),

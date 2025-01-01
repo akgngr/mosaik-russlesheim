@@ -1,5 +1,5 @@
 ---
-export const prerender = true
+export const prerender = false
 //@ts-ignore
 import { sanityClient } from "sanity:client"
 import MainLayout from "../../layouts/MainLayout.astro"
@@ -112,7 +112,7 @@ const { items: posts, pagination } = await sanityClient.fetch(query, {
           {
             Array.from(
               { length: Math.ceil(pagination.totalPageCount) },
-              (_, i) => i + 1
+              (_, i) => i + 1,
             ).map((pageNum) => (
               <a
                 href={`/projekt?page=${pageNum}`}

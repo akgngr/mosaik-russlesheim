@@ -1,3 +1,5 @@
+export const prerender = true
+
 import { sanityClient } from 'sanity:client';
 import imageUrlBuilder from "@sanity/image-url";
 import type { SanityAsset } from '@sanity/image-url/lib/types/types';

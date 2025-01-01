@@ -1,4 +1,4 @@
-// ./src/sanity/lib/load-query.ts
+export const prerender = true
 //@ts-ignore
 import { type QueryParams } from "sanity";
 //@ts-ignore

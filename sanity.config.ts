@@ -1,3 +1,4 @@
+export const prerender = true;
 //@ts-ignore
 import { defineConfig } from "sanity";
 //@ts-ignore

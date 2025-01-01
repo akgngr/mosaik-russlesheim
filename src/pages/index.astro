@@ -3,18 +3,39 @@ import MainLayout from "../layouts/MainLayout.astro"
 import BtnTransparent from "../components/btn_transparent.astro"
 import BtnBlack from "../components/btn_black.astro"
 import H1 from "../components/typography/h1.astro"
-import H2 from "../components/typography/h2.astro"
-import H3 from "../components/typography/h3.astro"
-import H4 from "../components/typography/h4.astro"
 import Maps from "../components/maps.astro"
 import SlideShow from "../components/slideshow/index.astro"
 import Activites from "../components/activites/index.astro"
+import type { SanityDocument } from "@sanity/client"
+import { loadQuery } from "../sanity/lib/load-query"
+import About from "../components/about/index.astro"
+import Projekt from "../components/projekt/index.astro"
+
+export const prerender = true
+
+const { data: page } = await loadQuery({
+  query: `*[_type == "page" && slug.current == "uber-uns"][0]`,
+})
+
+const { data: posts } = await loadQuery({
+  query: `*[_type == "post"] | order(_createdAt desc)[0...9]{
+    title,
+    slug,
+    image
+  }`,
+})
 ---
 
 <MainLayout title="Home Page">
   <SlideShow />
+
   <div class="h-auto">
     <Activites />
+    <About
+      title={(page as SanityDocument).title}
+      body={"Der Verein Mosaik Dialog und Kultur ist ein gemeinnütziger, eingetragener Verein in Rüsselsheim. Unser Wirkungskreis umfasst jedoch den Kreis Groß-Gerau und dem Main-Taunus-Kreis. Bildung ist unsere Priorität und wir sind fest entschlossen, die Bildung durch Sprachkurse, Nachhilfedienste, Sprachcafés usw. weiter zu fördern. "}
+    />
+    <Projekt projekts={posts} />
+    <Maps />
   </div>
-  <Maps />
 </MainLayout>

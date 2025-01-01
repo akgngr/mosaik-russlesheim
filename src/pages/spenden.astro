@@ -1,0 +1,136 @@
+---
+import MainLayout from "../layouts/MainLayout.astro"
+---
+
+<MainLayout title="Spenden">
+  <!-- Lottie animasyonları için lottie-player script'i -->
+  <script
+    src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"
+  ></script>
+  <section class="bg-gray-100 py-12">
+    <div class="container mx-auto px-6 text-center">
+      <h1 class="text-4xl font-bold text-gray-800 mb-4">
+        Unterstützen Sie Unsere Mission
+      </h1>
+      <p class="text-lg text-gray-600 mb-8">
+        Ihre Spende hilft uns, bedürftigen Menschen Hoffnung und Unterstützung
+        zu bieten. Gemeinsam können wir einen Unterschied machen.
+      </p>
+      <!-- Lottie Animasyonu -->
+      <div class="flex justify-center mb-8">
+        <lottie-player
+          src="https://assets10.lottiefiles.com/packages/lf20_jcikwtux.json"
+          <!--
+          Bu
+          URL'yi
+          seçtiğiniz
+          animasyonun
+          URL'siyle
+          değiştirin
+          --
+        >
+          background="transparent" speed="1" style="width: 300px; height:
+          300px;" loop autoplay>
+        </lottie-player>
+      </div>
+      <a
+        href="/donate"
+        class="bg-blue-500 text-white px-6 py-3 rounded-full text-lg font-semibold hover:bg-blue-600 transition duration-300"
+      >
+        Jetzt Spenden
+      </a>
+    </div>
+  </section>
+
+  <section class="py-12">
+    <div class="container mx-auto px-6">
+      <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">
+        Warum Ihre Spende Wichtig Ist
+      </h2>
+      <div class="flex flex-wrap justify-center">
+        <div class="w-full md:w-1/3 p-4">
+          <div class="bg-white shadow-lg rounded-lg p-6 text-center">
+            <h3 class="text-2xl font-semibold text-gray-800 mb-4">Bildung</h3>
+            <p class="text-gray-600 mb-4">
+              Ihre Unterstützung ermöglicht es uns, Bildungsprogramme für
+              benachteiligte Kinder und Erwachsene anzubieten.
+            </p>
+            <!-- İlgili Lottie Animasyonu -->
+            <div class="flex justify-center">
+              <lottie-player
+                src="https://assets10.lottiefiles.com/packages/lf20_9xkqux.json"
+                <!--
+                Bu
+                URL'yi
+                seçtiğiniz
+                animasyonun
+                URL'siyle
+                değiştirin
+                --
+              >
+                background="transparent" speed="1" style="width: 150px; height:
+                150px;" loop autoplay>
+              </lottie-player>
+            </div>
+          </div>
+        </div>
+        <div class="w-full md:w-1/3 p-4">
+          <div class="bg-white shadow-lg rounded-lg p-6 text-center">
+            <h3 class="text-2xl font-semibold text-gray-800 mb-4">
+              Gesundheit
+            </h3>
+            <p class="text-gray-600 mb-4">
+              Mit Ihrer Hilfe können wir medizinische Versorgung und
+              Gesundheitsprogramme für Bedürftige bereitstellen.
+            </p>
+            <!-- İlgili Lottie Animasyonu -->
+            <div class="flex justify-center">
+              <lottie-player
+                src="https://assets10.lottiefiles.com/packages/lf20_tutvdkg0.json"
+                <!--
+                Bu
+                URL'yi
+                seçtiğiniz
+                animasyonun
+                URL'siyle
+                değiştirin
+                --
+              >
+                background="transparent" speed="1" style="width: 150px; height:
+                150px;" loop autoplay>
+              </lottie-player>
+            </div>
+          </div>
+        </div>
+        <div class="w-full md:w-1/3 p-4">
+          <div class="bg-white shadow-lg rounded-lg p-6 text-center">
+            <h3 class="text-2xl font-semibold text-gray-800 mb-4">
+              Gemeinschaft
+            </h3>
+            <p class="text-gray-600 mb-4">
+              Ihre Spenden stärken Gemeinschaftsprojekte und fördern sozialen
+              Zusammenhalt in unserer Gesellschaft.
+            </p>
+            <!-- İlgili Lottie Animasyonu -->
+            <div class="flex justify-center">
+              <lottie-player
+                src="https://assets10.lottiefiles.com/packages/lf20_5ftv1z.json"
+                <!--
+                Bu
+                URL'yi
+                seçtiğiniz
+                animasyonun
+                URL'siyle
+                değiştirin
+                --
+              >
+                background="transparent" speed="1" style="width: 150px; height:
+                150px;" loop autoplay>
+              </lottie-player>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</MainLayout>

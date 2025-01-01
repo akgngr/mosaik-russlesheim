@@ -1,43 +1,81 @@
 ---
-import H3 from "../typography/h3.astro"
+import H2 from "../typography/h2.astro"
 //@ts-ignore
 import Card from "./card.astro"
 ---
 
 <section class="bg-[#cee2ef]">
-  <div class="w-11/12 md:w-10/12 mx-auto py-10">
-    <H3 clss="py-6">Aktivitäten</H3>
-    <div
-      data-carousel
-      class="flex md:grid md:grid-cols-2 lg:grid-cols-4 overflow-x-scroll snap-x snap-mandatory whitespace-nowrap scrollbar-hide gap-4"
-    >
-      <Card title="Kurse" url="#kurse" svg="course" />
-      <Card title="Jugendarbeit" url="#jugendarbeit" svg="cup" />
-      <Card title="Flüchtlingshilfe" url="#fluchtlingshilfe" svg="help" />
-      <Card title="Dialog" url="#dialog" svg="dialog" />
+  <div class="w-11/12 md:w-10/12 mx-auto pt-10 pb-20">
+    <H2 clss="py-6">Aktivitäten</H2>
+    <div class="swiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <Card title="Kurse" url="#kurse" svg="course" />
+        </div>
+        <div class="swiper-slide">
+          <Card title="Jugendarbeit" url="#jugendarbeit" svg="cup" />
+        </div>
+        <div class="swiper-slide">
+          <Card title="Flüchtlingshilfe" url="#fluchtlingshilfe" svg="help" />
+        </div>
+        <div class="swiper-slide">
+          <Card title="Dialog" url="#dialog" svg="dialog" />
+        </div>
+      </div>
+      <div class="swiper-scrollbar"></div>
     </div>
   </div>
+
+  <style>
+    .scrollbar-hide::-webkit-scrollbar {
+      display: none;
+    }
+    .scrollbar-hide {
+      -ms-overflow-style: none; /* Internet Explorer 10+ */
+      scrollbar-width: none; /* Firefox */
+    }
+
+    .snap-x {
+      scroll-snap-type: x mandatory;
+    }
+
+    .snap-center {
+      scroll-snap-align: center;
+    }
+
+    .overflow-x-scroll {
+      overflow-x: scroll;
+      overflow-y: hidden;
+    }
+  </style>
+  <script>
+    import Swiper from "swiper"
+    import "swiper/css"
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const swiper = new Swiper(".swiper", {
+        autoplay: true,
+        slidesPerView: 1,
+        breakpoints: {
+          640: {
+            slidesPerView: 2,
+            spaceBetween: 20,
+          },
+          768: {
+            slidesPerView: 3,
+            spaceBetween: 30,
+          },
+          1024: {
+            slidesPerView: 4,
+            spaceBetween: 30,
+          },
+        },
+        spaceBetween: 30,
+        loop: true,
+        scrollbar: {
+          el: ".swiper-scrollbar",
+        },
+      })
+    })
+  </script>
 </section>
-
-<style>
-  .scrollbar-hide::-webkit-scrollbar {
-    display: none;
-  }
-  .scrollbar-hide {
-    -ms-overflow-style: none; /* Internet Explorer 10+ */
-    scrollbar-width: none; /* Firefox */
-  }
-
-  .snap-x {
-    scroll-snap-type: x mandatory;
-  }
-
-  .snap-center {
-    scroll-snap-align: center;
-  }
-
-  .overflow-x-scroll {
-    overflow-x: scroll;
-    overflow-y: hidden;
-  }
-</style>

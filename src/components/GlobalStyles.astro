@@ -1,4 +1,5 @@
 <style is:global>
+  @tailwind utilities;
   h1,
   h2,
   h3,
@@ -14,5 +15,19 @@
 
   a {
     @apply text-[#747579] hover:text-[#006ab3];
+  }
+  @layer utilities {
+    .animate-spin {
+      animation: spin 2s linear infinite;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
   }
 </style>

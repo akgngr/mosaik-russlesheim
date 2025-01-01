@@ -1,0 +1,101 @@
+---
+//Projekt list
+import Card from "./card.astro"
+import BtnTransparent from "../btn_transparent.astro"
+import H2 from "../typography/h2.astro"
+
+const { projekts } = Astro.props
+---
+
+<section class="bg-[#cee2ef] relative">
+  <div
+    class="w-11/12 lg:px-0 md:w-10/12 mx-auto py-20 space-y-12 relative overflow-hidden"
+  >
+    <H2 color={false}>Projekt</H2>
+    <div class="swiper">
+      <div class="swiper-wrapper">
+        {
+          projekts.map((post: any) => (
+            <div class="swiper-slide">
+              <Card title={post.title} slug={post.slug} image={post.image} />
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+  <!-- <div class="control absolute top-1/2 w-full">
+    <div class="swiper-pagination"></div>
+    <div class="swiper-button-next"></div>
+  </div>
+  <div class="swiper-button-prev hidden"></div> -->
+</section>
+
+<script>
+  import Swiper from "swiper"
+  import { Autoplay } from "swiper/modules"
+  import "swiper/css"
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const swiper = new Swiper(".swiper", {
+      modules: [Autoplay],
+      loop: true,
+      autoplay: {
+        delay: 3000, // Her 3 saniyede bir geçiş yapar
+        disableOnInteraction: false, // Kullanıcı etkileşiminden sonra da devam eder
+        pauseOnMouseEnter: true, // Mouse hover olduğunda durur
+      },
+      slidesPerView: 1,
+      breakpoints: {
+        640: {
+          slidesPerView: 2,
+          spaceBetween: 20,
+        },
+        768: {
+          slidesPerView: 3,
+          spaceBetween: 30,
+        },
+        1024: {
+          slidesPerView: 4,
+          spaceBetween: 30,
+        },
+      },
+      spaceBetween: 30,
+      // pagination: {
+      //   el: ".swiper-pagination",
+      //   clickable: true,
+      // },
+      // navigation: {
+      //   nextEl: ".swiper-button-next",
+      //   prevEl: ".swiper-button-prev",
+      // },
+      scrollbar: {
+        el: ".swiper-scrollbar",
+      },
+    })
+  })
+</script>
+<style>
+  .swiper-button-prev:after,
+  .swiper-button-next:after {
+    border: 2px solid #006ab3;
+    background-color: white;
+    padding: 1rem;
+  }
+  .swiper-button-prev:hover,
+  .swiper-button-next:hover {
+    border: 2px solid white;
+    background-color: #006ab3;
+  }
+  .slider-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+  .swiper {
+    display: flex;
+  }
+  .swiper-slide {
+    flex: 0 0 auto; /* Slaytların boyutunu korur */
+  }
+</style>

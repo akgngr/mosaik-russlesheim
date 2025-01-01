@@ -1,0 +1,27 @@
+---
+import { sanityClient } from "sanity:client"
+import imageUrlBuilder from "@sanity/image-url"
+
+const { projectId, dataset } = sanityClient.config()
+
+const {
+  node: {
+    asset: { _ref },
+    alt,
+  },
+  ...attrs
+} = Astro.props
+
+// Create image builder instance once
+// @ts-ignore
+const builder = imageUrlBuilder({
+  // @ts-ignore
+  projectId: projectId,
+  // @ts-ignore
+  dataset: dataset,
+})
+
+const src = builder.image(_ref).auto("format").fit("max").width(512).toString()
+---
+
+<img src={src} alt={alt} {...attrs} />

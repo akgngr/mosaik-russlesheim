@@ -1,7 +1,8 @@
 ---
 // H4 Typography Style
+const { clss } = Astro.props
 ---
 
-<h4 class="text-3xl font-semibold text-[#2c2c2c]">
+<h4 class={"text-xl font-semibold text-[#2c2c2c] ${clss}"}>
   <slot />
 </h4>

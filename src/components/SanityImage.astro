@@ -1,0 +1,32 @@
+---
+import { Picture } from "astro:assets"
+import { urlForImage } from "../sanity/lib/urlForImage"
+import { inferRemoteSize } from "astro:assets"
+
+interface Props {
+  image: {
+    asset?: {
+      _ref: string | null
+      _type: string
+    }
+    alt: string | "Mosaik e.V."
+  }
+  className?: string
+}
+
+const { image, className = "" } = Astro.props
+const url = urlForImage(image).url()
+const webpUrl = urlForImage(image).format("webp").url()
+const { width, height } = await inferRemoteSize(url)
+// Sanity URL'inden optimize edilmiş resim URL'leri oluştur
+---
+
+<Picture
+  src={webpUrl}
+  alt={image.alt}
+  formats={["avif", "webp"]}
+  loading="lazy"
+  decoding="async"
+  width={width}
+  height={height}
+/>

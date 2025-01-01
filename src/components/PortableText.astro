@@ -1,0 +1,24 @@
+---
+import { PortableText as PortableTextInternal } from "astro-portabletext"
+import PortableTextImage from "./PortableTextImage.astro"
+
+interface Props {
+  portableText: any // You should replace 'any' with your specific portable text type
+}
+
+const { portableText } = Astro.props
+
+// Define components object outside of render to prevent recreating on each render
+const components = {
+  type: {
+    image: PortableTextImage,
+  },
+} as const // Using 'as const' for better type inference
+---
+
+{/* Only render if portableText exists */}
+{
+  portableText && (
+    <PortableTextInternal value={portableText} components={components} />
+  )
+}

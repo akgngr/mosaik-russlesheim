@@ -1,0 +1,28 @@
+---
+import { Picture } from "astro:assets"
+import dialogimg from "./dialog.png"
+import PortableText from "../PortableText.astro"
+import H2 from "../typography/h2.astro"
+import BtnBlack from "../btn_black.astro"
+const { title, body } = Astro.props
+---
+
+<section class="w-10/12 mx-auto py-20">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+    <div class="rounded-full">
+      <Picture
+        src={dialogimg}
+        formats={["avif", "webp"]}
+        alt="Mosaik Dialog und Kultur e.V."
+        class="rounded-full"
+      />
+    </div>
+    <div
+      class="relative space-y-8 flex flex-col justify-center items-start pl-0 md:pl-8"
+    >
+      <H2>{title}</H2>
+      <div>{body}</div>
+      <BtnBlack url="/uber-uns">Über Uns</BtnBlack>
+    </div>
+  </div>
+</section>

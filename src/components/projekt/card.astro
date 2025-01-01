@@ -1,0 +1,18 @@
+---
+import BtnBlack from "../btn_black.astro"
+import H4 from "../typography/h4.astro"
+import SanityImage from "../SanityImage.astro"
+
+const { title, slug, image } = Astro.props
+---
+
+<div class="card w-full h-[450px] space-y-2 bg-gray-50 shadow-md">
+  <SanityImage image={image} className="w-full h-64 object-cover rounded-lg" />
+  <div class="flex flex-col justify-start items-start space-y-6 p-6 pb-12">
+    <div class="space-y-2">
+      <H4>{title}</H4>
+      <div class="relative bg-gray-800 w-1/4 h-1"></div>
+    </div>
+    <BtnBlack url={"/posts/" + slug.current}>Mehr lesen</BtnBlack>
+  </div>
+</div>

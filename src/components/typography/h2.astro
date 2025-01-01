@@ -1,7 +1,16 @@
 ---
 // H2 Typography Style
+const { color, clss } = Astro.props
 ---
 
-<h2 class="text-5xl font-semibold text-[#2c2c2c]">
-  <slot />
-</h2>
+{
+  color ? (
+    <h2 class:list={["text-5xl font-semibold text-[#ffffff]", clss]}>
+      <slot />
+    </h2>
+  ) : (
+    <h2 class:list={["text-5xl font-semibold text-[#2c2c2c]", clss]}>
+      <slot />
+    </h2>
+  )
+}

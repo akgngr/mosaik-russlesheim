@@ -1,0 +1,52 @@
+---
+import { Picture } from "astro:assets"
+import imageUrlBuilder from "@sanity/image-url"
+import type { SanityImageSource } from "@sanity/image-url/lib/types/types"
+//@ts-ignore
+import { sanityClient } from "sanity:client"
+
+interface GalleryImage {
+  asset: {
+    _ref: string
+  }
+}
+
+const { projectId, dataset } = sanityClient.config()
+
+const urlFor = (source: SanityImageSource) =>
+  projectId && dataset
+    ? imageUrlBuilder({ projectId, dataset }).image(source)
+    : null
+
+const { gallery } = Astro.props
+
+// Process images using map directly instead of pushing to array
+//@ts-expect-error
+const images = gallery.reduce<string[]>((acc, image: GalleryImage) => {
+  const imageUrl = image.asset?._ref
+    ? urlFor(image.asset._ref)?.width(550).height(310).blur(5).url()
+    : null
+
+  if (imageUrl) {
+    acc.push(imageUrl)
+  }
+  return acc
+}, [])
+---
+
+<div class="grid grid-cols-2 gap-6">
+  {
+    images.map((imageUrl: string) => (
+      <Picture
+        src={imageUrl}
+        alt="Mosaik e.V"
+        width={550}
+        height={310}
+        decoding="async"
+        loading="lazy"
+        formats={["avif", "webp"]}
+        class="rounded-md p-2 shadow-md"
+      />
+    ))
+  }
+</div>

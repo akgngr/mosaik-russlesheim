@@ -12,6 +12,10 @@ dotenv.config();
 export default defineConfig({
   image: {
     domains: ["astro.build"],
+    remotePatterns: [{
+      protocol: 'https',
+      hostname: '**.sanity.io',
+    }],
   },
   integrations: [
     icon(),

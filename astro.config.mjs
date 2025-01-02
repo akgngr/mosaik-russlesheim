@@ -5,7 +5,7 @@ import sanity from "@sanity/astro";
 import icon from "astro-icon";
 import react from "@astrojs/react";
 import { defineConfig, passthroughImageService } from 'astro/config';
-import vercel from '@astrojs/vercel';
+import netlify from '@astrojs/netlify';
 
 dotenv.config();
 
@@ -30,5 +30,5 @@ export default defineConfig({
       studioBasePath: '/studio'
     }), react()
   ],
-  adapter: vercel(),
+  adapter: netlify(),
 });

@@ -1,5 +1,5 @@
 ---
-export const prerender = true
+export const prerender = false
 //@ts-ignore
 import { sanityClient } from "sanity:client"
 import MainLayout from "../../layouts/MainLayout.astro"
@@ -8,7 +8,10 @@ import type { SanityImageSource } from "@sanity/image-url/lib/types/types"
 import H1 from "../../components/typography/h1.astro"
 // Sayfa ve gönderi sayısı ayarları
 // @ts-ignore
+
 const pageParam = Astro.url.searchParams.get("page")
+
+console.log("Sanity pageParam: " + pageParam)
 const currentPage = pageParam ? Math.max(1, parseInt(pageParam, 10)) : 1
 console.log("Sanity page: " + currentPage)
 const postsPerPage = 12
@@ -94,59 +97,61 @@ const { items: posts, pagination } = await sanityClient.fetch(query, {
     }
 
     {/* Sayfalama Kontrolleri */}
-    <div class="flex justify-center gap-4 mt-12">
-      <nav class="flex items-center gap-2" aria-label="Pagination">
-        {/* Önceki Sayfa */}
-        {
-          pagination.currentPage > 1 && (
-            <a
-              href={`/projekt?page=${pagination.currentPage - 1}`}
-              class="px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition-colors duration-200"
-              aria-label="Previous page"
-            >
-              Previous
-            </a>
-          )
-        }
-
-        {/* Sayfa Numaraları */}
-        <div class="flex gap-2">
+    <Fragment client:load>
+      <div class="flex justify-center gap-4 mt-12">
+        <nav class="flex items-center gap-2" aria-label="Pagination">
+          {/* Önceki Sayfa */}
           {
-            Array.from(
-              { length: Math.ceil(pagination.totalPageCount) },
-              (_, i) => i + 1,
-            ).map((pageNum) => (
+            pagination.currentPage > 1 && (
               <a
-                href={`/projekt?page=${pageNum}`}
-                class={`px-4 py-2 rounded-md transition-colors duration-200 ${
-                  pagination.currentPage === pageNum
-                    ? "bg-blue-500 text-white"
-                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                }`}
-                aria-current={
-                  pagination.currentPage === pageNum ? "page" : undefined
-                }
+                href={`/projekt?page=${pagination.currentPage - 1}`}
+                class="px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition-colors duration-200"
+                aria-label="Previous page"
               >
-                {pageNum}
+                Previous
               </a>
-            ))
+            )
           }
-        </div>
 
-        {/* Sonraki Sayfa */}
-        {
-          pagination.currentPage < Math.ceil(pagination.totalPageCount) && (
-            <a
-              href={`/projekt?page=${pagination.currentPage + 1}`}
-              class="px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition-colors duration-200"
-              aria-label="Next page"
-            >
-              Next
-            </a>
-          )
-        }
-      </nav>
-    </div>
+          {/* Sayfa Numaraları */}
+          <div class="flex gap-2">
+            {
+              Array.from(
+                { length: Math.ceil(pagination.totalPageCount) },
+                (_, i) => i + 1,
+              ).map((pageNum) => (
+                <a
+                  href={`/projekt?page=${pageNum}`}
+                  class={`px-4 py-2 rounded-md transition-colors duration-200 ${
+                    pagination.currentPage === pageNum
+                      ? "bg-blue-500 text-white"
+                      : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                  }`}
+                  aria-current={
+                    pagination.currentPage === pageNum ? "page" : undefined
+                  }
+                >
+                  {pageNum}
+                </a>
+              ))
+            }
+          </div>
+
+          {/* Sonraki Sayfa */}
+          {
+            pagination.currentPage < Math.ceil(pagination.totalPageCount) && (
+              <a
+                href={`/projekt?page=${pagination.currentPage + 1}`}
+                class="px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition-colors duration-200"
+                aria-label="Next page"
+              >
+                Next
+              </a>
+            )
+          }
+        </nav>
+      </div>
+    </Fragment>
 
     {/* Sayfa Bilgisi */}
     <div class="text-center mt-4 text-sm text-gray-600">

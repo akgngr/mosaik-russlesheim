@@ -1,7 +1,12 @@
 {
-  "functions": {
-    "api/**/*.js": {
-      "runtime": "nodejs16.x"
+  "buildCommand": "npm run build",
+  "devCommand": "npm run dev",
+  "installCommand": "npm install",
+  "framework": "astro",
+  "builds": [
+    {
+      "src": "dist/**",
+      "use": "@vercel/static"
     }
-  }
+  ]
 }

@@ -5,6 +5,8 @@ import sanity from "@sanity/astro";
 import icon from "astro-icon";
 import react from "@astrojs/react";
 import { defineConfig, passthroughImageService } from 'astro/config';
+import vercel from '@astrojs/vercel';
+
 dotenv.config();
 
 export default defineConfig({
@@ -27,5 +29,7 @@ export default defineConfig({
       apiVersion: "2022-03-07",
       studioBasePath: '/studio'
     }), react()
-  ]
+  ],
+  output: 'server',
+  adapter: vercel(),
 });

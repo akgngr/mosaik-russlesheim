@@ -11,3 +11,8 @@ interface ImportMetaEnv {
     readonly PUBLIC_SANITY_CDN: boolean;
     // more env variables...
 }
+
+declare module 'lucide-astro' {
+    const content: any;
+    export default content;
+}

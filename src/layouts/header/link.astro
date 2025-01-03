@@ -1,10 +1,13 @@
 ---
-const { url } = Astro.props
+const { url, className } = Astro.props
 ---
 
 <a
   href={url}
-  class="font-heading text-base uppercase font-[500] hover:duration-700"
+  class:list={[
+    "font-heading text-base uppercase font-[500] hover:duration-700 active:text-[#de0a84]",
+    className,
+  ]}
 >
   <slot />
 </a>

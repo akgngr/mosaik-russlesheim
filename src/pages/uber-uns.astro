@@ -1,6 +1,5 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro"
-import H1 from "../components/typography/h1.astro"
 import { loadQuery } from "../sanity/lib/load-query"
 import PortableText from "../components/PortableText.astro"
 // Define interface for the page data
@@ -29,13 +28,13 @@ try {
 ---
 
 <MainLayout title="Über Uns">
-  <div class="container mx-auto min-h-[calc(100vh-120px)] w-8/12 py-8">
+  <div class="">
     {/* Only render if page data exists */}
     {
       page ? (
         <article>
-          <header>
-            <H1>{page.title}</H1>
+          <header class="space-y-2">
+            <h1 class="text-2xl font-semibold">{page.title}</h1>
           </header>
           <section class="prose-lg space-y-4">
             <PortableText portableText={page.body} />

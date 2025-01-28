@@ -5,22 +5,22 @@ import { loadQuery } from "../sanity/lib/load-query"
 import PortableText from "../components/PortableText.astro"
 // Define interface for the page data
 interface PageData {
-    title: string
-    body: any // Replace 'any' with your specific portable text type
+  title: string
+  body: any // Replace 'any' with your specific portable text type
 }
 
 // Fetch page data with error handling
 let page: PageData | null = null
 try {
-    const { data } = await loadQuery<PageData>({
-        query: `*[_type == "page" && slug.current == "impressum"][0]{
+  const { data } = await loadQuery<PageData>({
+    query: `*[_type == "page" && slug.current == "impressum"][0]{
       title,
       body,
     }`,
-    })
-    page = data
+  })
+  page = data
 } catch (error) {
-    console.error("Error fetching page data:", error)
+  console.error("Error fetching page data:", error)
 }
 
 // Remove unused imports
@@ -29,23 +29,23 @@ try {
 ---
 
 <MainLayout title="Impressum">
-    <div class="container mx-auto min-h-[calc(100vh-120px)] w-8/12 py-8">
-        {/* Only render if page data exists */}
-        {
-            page ? (
-                <article>
-                    <header>
-                        <H1>{page.title}</H1>
-                    </header>
-                    <section class="prose-lg space-y-4">
-                        <PortableText portableText={page.body} />
-                    </section>
-                </article>
-            ) : (
-                <div class="text-center py-8">
-                    <p>Content could not be loaded.</p>
-                </div>
-            )
-        }
-    </div>
+  <div>
+    {/* Only render if page data exists */}
+    {
+      page ? (
+        <article>
+          <header>
+            <H1>{page.title}</H1>
+          </header>
+          <section class="prose-lg space-y-4">
+            <PortableText portableText={page.body} />
+          </section>
+        </article>
+      ) : (
+        <div class="text-center py-8">
+          <p>Content could not be loaded.</p>
+        </div>
+      )
+    }
+  </div>
 </MainLayout>

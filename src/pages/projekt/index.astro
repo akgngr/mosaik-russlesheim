@@ -54,7 +54,7 @@ const { items: posts, pagination } = await sanityClient.fetch(query, {
 ---
 
 <MainLayout title="Blog Posts">
-  <div class="container mx-auto min-h-[calc(100vh-120px)] w-10/12 py-8">
+  <div class="">
     <H1>Projekt</H1>
 
     {
@@ -118,7 +118,7 @@ const { items: posts, pagination } = await sanityClient.fetch(query, {
             {
               Array.from(
                 { length: Math.ceil(pagination.totalPageCount) },
-                (_, i) => i + 1,
+                (_, i) => i + 1
               ).map((pageNum) => (
                 <a
                   href={`/projekt?page=${pageNum}`}

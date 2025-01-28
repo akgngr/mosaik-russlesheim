@@ -1,5 +1,5 @@
 ---
-import MainLayout from "../layouts/MainLayout.astro"
+import HomeLayout from "../layouts/HomeLayout.astro"
 import Maps from "../components/maps.astro"
 import SlideShow from "../components/slideshow/index.astro"
 import Activites from "../components/activites/index.astro"
@@ -38,7 +38,7 @@ const { data: posts } = await loadQuery({
 })
 ---
 
-<MainLayout title="Home Page">
+<HomeLayout title="Home Page">
   <SlideShow slides={slider} />
 
   <div class="h-auto">
@@ -50,4 +50,4 @@ const { data: posts } = await loadQuery({
     <Projekt projekts={posts} />
     <Maps />
   </div>
-</MainLayout>
+</HomeLayout>

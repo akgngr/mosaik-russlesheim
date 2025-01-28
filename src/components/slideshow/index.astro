@@ -1,34 +1,92 @@
 ---
-import PrevBtn from "./prev_btn.astro"
-import NextBtn from "./next_btn.astro"
 import Slide from "./slide.astro"
+//@ts-ignore
+import { sanityClient } from "sanity:client"
+import imageUrlBuilder from "@sanity/image-url"
+import type { SanityImageSource } from "@sanity/image-url/lib/types/types"
+
+const { projectId, dataset } = sanityClient.config()
+
+const urlFor = (source: SanityImageSource) =>
+  projectId && dataset
+    ? imageUrlBuilder({ projectId, dataset }).image(source)
+    : null
+
+const { slides } = Astro.props
+console.log(slides)
+
+interface SlideType {
+  title: string
+  description: string
+  desktopImage: {
+    asset: {
+      _ref: string
+    }
+  }
+  href?: string
+  relatedPost?: {
+    slug: {
+      current: string
+    }
+  }
+}
 ---
 
-<div class="relative w-full h-[calc(100vh-120px)] overflow-hidden">
-  <div id="slides" class="relative w-full h-full">
-    <Slide
-      title="Slide 1"
-      desc="Description 1"
-      img="/slide1.jpg"
-      data-slide="1"
-    />
-    <Slide
-      title="Slide 2"
-      desc="Description 2"
-      img="/Kooperation-mit-Projekt-auf.jpg"
-      class="opacity-0"
-      data-slide="2"
-    />
+<div class="swiper-slider">
+  <div class="swiper-wrapper">
+    {
+      slides.map((slide: SlideType, index: number) => {
+        const link =
+          slide.href ||
+          (slide.relatedPost?.slug?.current
+            ? `projekt/${slide.relatedPost.slug.current}`
+            : "#")
+
+        return (
+          <Slide
+            cls="swiper-slide"
+            title={slide.title}
+            desc={slide.description}
+            img={urlFor(slide.desktopImage.asset._ref)?.url()}
+            link={link}
+            data-slide={index + 1}
+          />
+        )
+      })
+    }
   </div>
-  <div
-    class="absolute bottom-4 right-0 -translate-x-1/2 md:flex hidden space-x-2"
-  >
-    <PrevBtn />
-    <NextBtn />
-  </div>
+  <div class="swiper-pagination"></div>
 </div>
 
 <script>
+  import Swiper from "swiper"
+  import { Autoplay, Pagination } from "swiper/modules"
+  import "swiper/css"
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const swiper = new Swiper(".swiper-slider", {
+      modules: [Autoplay, Pagination],
+      loop: true,
+      autoplay: {
+        delay: 5000, // Her 3 saniyede bir geçiş yapar
+        disableOnInteraction: false, // Kullanıcı etkileşiminden sonra da devam eder
+        pauseOnMouseEnter: true, // Mouse hover olduğunda durur
+      },
+      slidesPerView: 1,
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+      scrollbar: {
+        el: ".swiper-scrollbar",
+      },
+    })
+  })
+  /**
   document.addEventListener("DOMContentLoaded", () => {
     const slides = document.querySelectorAll("#slides > div")
     const prevButton = document.getElementById("prev")
@@ -61,4 +119,33 @@ import Slide from "./slide.astro"
     // Otomatik geçiş (isteğe bağlı)
     setInterval(nextSlide, 5000) // 5 saniyede bir geçiş
   })
+  */
 </script>
+<style>
+  .swiper-slider,
+  .swiper-slide {
+    height: calc(100vh - 120px);
+  }
+  .swiper-button-prev:after,
+  .swiper-button-next:after {
+    border: 2px solid #006ab3;
+    background-color: white;
+    padding: 1rem;
+  }
+  .swiper-button-prev:hover,
+  .swiper-button-next:hover {
+    border: 2px solid white;
+    background-color: #006ab3;
+  }
+  .slider-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+  .swiper {
+    display: flex;
+  }
+  .swiper-slide {
+    flex: 0 0 auto; /* Slaytların boyutunu korur */
+  }
+</style>

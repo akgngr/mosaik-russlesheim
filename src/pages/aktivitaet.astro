@@ -1,0 +1,11 @@
+---
+import MainLayout from "@/layouts/MainLayout.astro"
+import AddToCalendarButton from "../components/addToCanaldar.tsx"
+---
+
+<MainLayout title="Aktivitäten">
+  <div class="container mx-auto min-h-[calc(100vh-120px)] w-8/12 py-8">
+    <h1>Aktivitäten</h1>
+    <AddToCalendarButton client:only="react" label="Woohooo" />
+  </div>
+</MainLayout>

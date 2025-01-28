@@ -10,6 +10,21 @@ import Projekt from "../components/projekt/index.astro"
 
 export const prerender = true
 
+const { data: slider } = await loadQuery({
+  query: `*[_type == "slideShow" ] {
+    title,
+    description,
+    link,
+    href,
+    desktopImage,
+    mobileImage,
+    "relatedPost": link->{
+      title,
+      slug
+    }
+  }`,
+})
+
 const { data: page } = await loadQuery({
   query: `*[_type == "page" && slug.current == "uber-uns"][0]`,
 })
@@ -24,7 +39,7 @@ const { data: posts } = await loadQuery({
 ---
 
 <MainLayout title="Home Page">
-  <SlideShow />
+  <SlideShow slides={slider} />
 
   <div class="h-auto">
     <Activites />

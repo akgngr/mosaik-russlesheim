@@ -1,11 +1,12 @@
 ---
 const { url, className } = Astro.props
+console.log(className)
 ---
 
 <a
   href={url}
   class:list={[
-    "font-heading text-base uppercase font-[500] hover:duration-700 active:text-[#de0a84]",
+    "font-heading text-base uppercase font-[500] hover:duration-700",
     className,
   ]}
 >

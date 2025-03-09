@@ -1,9 +1,9 @@
 ---
 import Maps from "@/components/maps.astro"
-import MainLayout from "@/layouts/MainLayout.astro"
+import HomeLayout from "@/layouts/HomeLayout.astro"
 ---
 
-<MainLayout title="Kontakt">
+<HomeLayout title="Kontakt">
   <section>
     <!-- Contact Hero Section -->
     <section class="py-24 bg-white">
@@ -77,7 +77,7 @@ import MainLayout from "@/layouts/MainLayout.astro"
               <div>
                 <button
                   type="submit"
-                  class="w-full bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors"
+                  class="flex gap-2 justify-center items-center font-heading uppercase text-[#006ab3] border-2 border-[#006ab3] py-2 px-4 bg-transparent font-semibold focus:outline-none focus:ring-2 focus:ring-gray-700 focus:ring-opacity-75 hover:bg-[#006ab3] hover:duration-700 hover:text-white"
                 >
                   Nachricht senden
                 </button>
@@ -92,9 +92,8 @@ import MainLayout from "@/layouts/MainLayout.astro"
               <h3 class="text-xl font-bold mb-4">Unsere Adresse</h3>
               <div class="space-y-2 text-gray-600">
                 <p>Mosaik Dialog und Kultur e.V.</p>
-                <p>Hauptstraße 123</p>
+                <p>BahnhofStr. 20,</p>
                 <p>65428 Rüsselsheim</p>
-                <p>Deutschland</p>
               </div>
             </div>
 
@@ -104,15 +103,14 @@ import MainLayout from "@/layouts/MainLayout.astro"
               <div class="space-y-2 text-gray-600">
                 <p>
                   <strong>Telefon:</strong>
-                  <a href="tel:+49123456789" class="hover:text-blue-600"
-                    >+49 123 456 789</a
+                  <a href="tel:+491797051273" class="hover:text-blue-600"
+                    >+49 179-7051273</a
                   >
                 </p>
                 <p>
                   <strong>E-Mail:</strong>
-                  <a
-                    href="mailto:info@mosaik-dialog.de"
-                    class="hover:text-blue-600">info@mosaik-dialog.de</a
+                  <span class="hover:text-blue-600"
+                    >kontakt@mosaik-ruesselsheim.de</span
                   >
                 </p>
               </div>
@@ -140,4 +138,4 @@ import MainLayout from "@/layouts/MainLayout.astro"
       <Maps />
     </section>
   </section>
-</MainLayout>
+</HomeLayout>

@@ -1,0 +1,253 @@
+---
+// TypeScript interface for component props
+interface Props {
+  galleryClass?: string
+  class?: string
+}
+
+// Component props with default values
+const { galleryClass = "lightbox-gallery" } = Astro.props
+---
+
+<div class={galleryClass} id="lightbox-gallery">
+  <slot />
+</div>
+
+<div class="lightbox" id="lightbox">
+  <div class="lightbox-content">
+    <span class="lightbox-close">&times;</span>
+    <img class="lightbox-image" id="lightbox-img" alt="" />
+    <div class="lightbox-caption" id="lightbox-caption"></div>
+    <a class="lightbox-prev">&#10094;</a>
+    <a class="lightbox-next">&#10095;</a>
+  </div>
+</div>
+
+<style>
+  /* Lightbox Gallery Styles */
+  .lightbox-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 15px;
+    margin: 20px 0;
+  }
+
+  .lightbox-gallery img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+
+  .lightbox-gallery img:hover {
+    transform: scale(1.05);
+  }
+
+  /* Lightbox Styles */
+  .lightbox {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+  }
+
+  .lightbox-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+  }
+
+  .lightbox-image {
+    max-width: 90%;
+    max-height: 80%;
+    object-fit: contain;
+  }
+
+  .lightbox-caption {
+    color: white;
+    font-size: 18px;
+    padding: 15px 0;
+    text-align: center;
+    width: 100%;
+  }
+
+  .lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: white;
+    font-size: 36px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 1001;
+  }
+
+  .lightbox-prev,
+  .lightbox-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: white;
+    font-size: 36px;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 16px;
+    user-select: none;
+  }
+
+  .lightbox-prev {
+    left: 20px;
+  }
+
+  .lightbox-next {
+    right: 20px;
+  }
+
+  .lightbox-prev:hover,
+  .lightbox-next:hover,
+  .lightbox-close:hover {
+    color: #bbb;
+  }
+</style>
+
+<script>
+  // TypeScript implementation
+  document.addEventListener("DOMContentLoaded", () => {
+    // Type definitions
+    type HTMLElementOrNull = HTMLElement | null
+    type HTMLImageElementOrNull = HTMLImageElement | null
+
+    // Get lightbox elements with proper type casting
+    const lightbox = document.getElementById("lightbox") as HTMLElementOrNull
+    const lightboxImg = document.getElementById(
+      "lightbox-img"
+    ) as HTMLImageElementOrNull
+    const lightboxCaption = document.getElementById(
+      "lightbox-caption"
+    ) as HTMLElementOrNull
+    const closeBtn = document.querySelector(
+      ".lightbox-close"
+    ) as HTMLElementOrNull
+    const prevBtn = document.querySelector(
+      ".lightbox-prev"
+    ) as HTMLElementOrNull
+    const nextBtn = document.querySelector(
+      ".lightbox-next"
+    ) as HTMLElementOrNull
+
+    // Check if all elements exist
+    if (
+      !lightbox ||
+      !lightboxImg ||
+      !lightboxCaption ||
+      !closeBtn ||
+      !prevBtn ||
+      !nextBtn
+    ) {
+      console.error("One or more lightbox elements could not be found")
+      return
+    }
+
+    // Get all gallery images
+    const galleryImages: NodeListOf<HTMLImageElement> =
+      document.querySelectorAll("#lightbox-gallery img")
+    let currentIndex: number = 0
+
+    // Add click event to each gallery image
+    galleryImages.forEach((img: HTMLImageElement, index: number) => {
+      img.addEventListener("click", () => {
+        currentIndex = index
+        openLightbox(img)
+      })
+    })
+
+    // Open lightbox function
+    function openLightbox(img: HTMLImageElement): void {
+      if (lightbox) {
+        lightbox.style.display = "block"
+      }
+      if (lightboxImg) {
+        lightboxImg.src = img.src
+        lightboxImg.alt = img.alt || ""
+      }
+      if (lightboxCaption) {
+        lightboxCaption.textContent = img.alt || ""
+      }
+      document.body.style.overflow = "hidden" // Prevent scrolling
+    }
+
+    // Close lightbox function
+    function closeLightbox(): void {
+      if (lightbox) {
+        lightbox.style.display = "none"
+      }
+      document.body.style.overflow = "" // Restore scrolling
+    }
+
+    // Navigate to previous image
+    function prevImage(): void {
+      if (currentIndex > 0) {
+        currentIndex--
+      } else {
+        currentIndex = galleryImages.length - 1
+      }
+      updateLightboxImage()
+    }
+
+    // Navigate to next image
+    function nextImage(): void {
+      if (currentIndex < galleryImages.length - 1) {
+        currentIndex++
+      } else {
+        currentIndex = 0
+      }
+      updateLightboxImage()
+    }
+
+    // Update lightbox image and caption based on current index
+    function updateLightboxImage(): void {
+      const currentImage = galleryImages[currentIndex]
+      if (lightboxImg && currentImage) {
+        lightboxImg.src = currentImage.src
+        lightboxImg.alt = currentImage.alt || ""
+      }
+      if (lightboxCaption && currentImage) {
+        lightboxCaption.textContent = currentImage.alt || ""
+      }
+    }
+
+    // Event listeners
+    closeBtn.addEventListener("click", closeLightbox)
+    prevBtn.addEventListener("click", prevImage)
+    nextBtn.addEventListener("click", nextImage)
+
+    // Close lightbox when clicking outside the image
+    lightbox.addEventListener("click", (e: MouseEvent) => {
+      if (e.target === lightbox) {
+        closeLightbox()
+      }
+    })
+
+    // Keyboard navigation
+    document.addEventListener("keydown", (e: KeyboardEvent) => {
+      if (lightbox && lightbox.style.display === "block") {
+        if (e.key === "Escape") {
+          closeLightbox()
+        } else if (e.key === "ArrowLeft") {
+          prevImage()
+        } else if (e.key === "ArrowRight") {
+          nextImage()
+        }
+      }
+    })
+  })
+</script>

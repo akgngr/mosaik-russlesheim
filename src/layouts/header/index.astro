@@ -4,7 +4,10 @@
 import { Icon } from "astro-icon/components"
 import Link from "./link.astro"
 import BtnBlack from "../../components/btn_black.astro"
-const currentUrl = Astro.url.pathname
+
+const pathname = new URL(Astro.request.url).pathname
+const currentPath = pathname.slice(1)
+console.log(currentPath)
 ---
 
 <header class="w-full">
@@ -33,12 +36,29 @@ const currentUrl = Astro.url.pathname
       class="absolute top-28 left-0 z-20 bg-gray-100 transform transition-transform duration-200 hidden -translate-y-4 h-screen w-screen"
     >
       <nav class="flex flex-col gap-4 p-6">
-        <Link url="/">Home</Link>
-        <Link url="/uber-uns">Über Uns</Link>
-        <Link url="/projekt">Projekt</Link>
-        <Link url="/aktivitaet">Aktivität</Link>
-        <Link url="/fluchtlingshilfe">Flüchtlingshilfe</Link>
-        <Link url="/kontakt">Kontakt</Link>
+        <Link className={currentPath === "" ? "text-[#de0a84]" : ""} url="/"
+          >Home</Link
+        >
+        <Link
+          className={currentPath === "uber-uns" ? "text-[#de0a84]" : ""}
+          url="/uber-uns">Über Uns</Link
+        >
+        <Link
+          className={currentPath === "projekt" ? "text-[#de0a84]" : ""}
+          url="/projekt">Projekt</Link
+        >
+        <Link
+          className={currentPath === "aktivitaet" ? "text-[#de0a84]" : ""}
+          url="/aktivitaet">Aktivität</Link
+        >
+        <Link
+          className={currentPath === "fluchtlingshilfe" ? "text-[#de0a84]" : ""}
+          url="/fluchtlingshilfe">Flüchtlingshilfe</Link
+        >
+        <Link
+          className={currentPath === "kontakt" ? "text-[#de0a84]" : ""}
+          url="/kontakt">Kontakt</Link
+        >
         <BtnBlack url="/spenden">Spenden</BtnBlack>
         <div class="flex gap-4 mt-6">
           <BtnBlack
@@ -84,12 +104,43 @@ const currentUrl = Astro.url.pathname
     <!-- Navigation -->
     <div class="lg:flex hidden gap-6 items-center">
       <ul class="flex gap-4">
-        <li><Link url="/">Home</Link></li>
-        <li><Link url="/uber-uns">Über Uns</Link></li>
-        <li><Link url="/projekt">Projekt</Link></li>
-        <li><Link url="/aktivitaet">Aktivität</Link></li>
-        <li><Link url="/fluchtlingshilfe">Flüchtlingshilfe</Link></li>
-        <li><Link url="/kontakt">Kontakt</Link></li>
+        <li>
+          <Link className={currentPath === "" ? "text-[#de0a84]" : ""} url="/"
+            >Home</Link
+          >
+        </li>
+        <li>
+          <Link
+            className={currentPath === "uber-uns" ? "text-[#de0a84]" : ""}
+            url="/uber-uns">Über Uns</Link
+          >
+        </li>
+        <li>
+          <Link
+            className={currentPath === "projekt" ? "text-[#de0a84]" : ""}
+            url="/projekt">Projekt</Link
+          >
+        </li>
+        <li>
+          <Link
+            className={currentPath === "aktivitaet" ? "text-[#de0a84]" : ""}
+            url="/aktivitaet">Aktivität</Link
+          >
+        </li>
+        <li>
+          <Link
+            className={currentPath === "fluchtlingshilfe"
+              ? "text-[#de0a84]"
+              : ""}
+            url="/fluchtlingshilfe">Flüchtlingshilfe</Link
+          >
+        </li>
+        <li>
+          <Link
+            className={currentPath === "kontakt" ? "text-[#de0a84]" : ""}
+            url="/kontakt">Kontakt</Link
+          >
+        </li>
       </ul>
       <a
         href="/spenden"
@@ -120,7 +171,7 @@ const currentUrl = Astro.url.pathname
 
   menuButton.addEventListener("click", () => {
     menuButton.classList.toggle("active")
-    menu.classList.toggle("active") // Menüyü aç/kapa
+    menu.classList.toggle("active")
   })
 </script>
 

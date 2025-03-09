@@ -28,21 +28,18 @@ const urlFor = (source: SanityImageSource) =>
     ? imageUrlBuilder({ projectId, dataset }).image(source)
     : null
 
-const postImageUrl = post.image
-  ? urlFor(post.image)?.width(550).height(310).blur(5).url()
-  : null
+const postImageUrl = post.image ? urlFor(post.image)?.url() : null
+console.log(post.image)
 ---
 
 <MainLayout title={post.title}>
-  <main class="mx-auto min-h-screen max-w-3xl p-8 flex flex-col gap-4">
-    <a href="/projekt" class="hover:underline">&larr; Zurück zu den Beiträgen</a
-    >
+  <main class="mx-auto min-h-screen">
     {
       postImageUrl && (
         <Picture
           src={postImageUrl}
           alt={post.title}
-          class="aspect-video rounded-md w-full"
+          class="h-[550px] w-full object-contain rounded-md"
           width="550"
           height="310"
           decoding="async"
@@ -51,17 +48,16 @@ const postImageUrl = post.image
         />
       )
     }
-    <h1 class="text-4xl font-bold mb-8">{post.title}</h1>
-    <div class="prose-lg space-y-8 text-lg">
-      <p>Published: {new Date(post.publishedAt).toLocaleDateString()}</p>
-      {Array.isArray(post.body) && <PortableText value={post.body} />}
-    </div>
-    {
-      post.imageGallery ? (
-        <div>
-          <Gallery gallery={post.imageGallery} />
-        </div>
-      ) : null
-    }
+    <article class="mx-auto max-w-3xl p-8 flex flex-col gap-4">
+      <a href="/projekt" class="hover:underline"
+        >&larr; Zurück zu den Beiträgen</a
+      >
+      <h1 class="text-4xl font-bold mb-8">{post.title}</h1>
+      <div class="prose-lg space-y-8 text-lg">
+        <p>Published: {new Date(post.publishedAt).toLocaleDateString()}</p>
+        {Array.isArray(post.body) && <PortableText value={post.body} />}
+      </div>
+      {post.imageGallery ? <Gallery gallery={post.imageGallery} /> : null}
+    </article>
   </main>
 </MainLayout>

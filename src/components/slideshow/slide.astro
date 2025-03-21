@@ -5,11 +5,11 @@ const { title, desc, img, link, cls, dataSlide } = Astro.props
 ---
 
 <div
-  class:list={["swiper-slide absolute w-full h-full transition-opacity duration-500", cls]}
+  class:list={["absolute w-full h-full transition-opacity duration-500", cls]}
   data-swiper-slide-index={dataSlide}
   data-slide={dataSlide}
 >
-  <Image src={img} alt={title} class="object-cover w-full h-full" width="1600" height="600" />
+  <Image src={img} alt={title} class="object-cover w-full h-full" width="1600" height="500" />
   <div class="absolute inset-0 bg-black opacity-50"></div>
   <div
     class="absolute bottom-0 left-0 p-10 space-y-4 bg-[#676767] w-full h-60 bg-opacity-50 text-white"

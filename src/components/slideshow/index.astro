@@ -32,8 +32,8 @@ interface SlideType {
 }
 ---
 
-<div class="swiper-home">
-  <div class="swiper-wrapper">
+<div class="slider-container relative h-[calc(100vh-120px)]">
+  <div id="slides" class="relative w-full h-full">
     {
       slides.map((slide: SlideType, index: number) => {
         const link =
@@ -44,108 +44,56 @@ interface SlideType {
 
         return (
           <Slide
-            cls="swiper-slide"
             title={slide.title}
             desc={slide.description}
             img={urlFor(slide.desktopImage.asset._ref)?.url()}
             link={link}
-            data-slide={index + 1}
+            dataSlide={index}
           />
         )
       })
     }
   </div>
-  <div class="swiper-pagination"></div>
+  <button id="prev" class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-50 hover:bg-opacity-100 p-4 rounded-full z-10 transition-all duration-300">←</button>
+  <button id="next" class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-50 hover:bg-opacity-100 p-4 rounded-full z-10 transition-all duration-300">→</button>
 </div>
 
 <script>
-  import Swiper from "swiper"
-  import { Autoplay, Pagination } from "swiper/modules"
-  import "swiper/css"
+  document.addEventListener("DOMContentLoaded", () => {
+    const slides = document.querySelectorAll("[data-slide]");
+    const prevButton = document.getElementById("prev");
+    const nextButton = document.getElementById("next");
+    let currentSlide = 0;
 
-  document.addEventListener("DOMContentLoaded", () => {
-    const swiper = new Swiper(".swiper-home", {
-      modules: [Autoplay, Pagination],
-      loop: document.querySelectorAll('.swiper-slide').length > 1,
-      autoplay: {
-        delay: 5000, 
-        disableOnInteraction: false, // Kullanıcı etkileşiminden sonra da devam eder
-        pauseOnMouseEnter: true, // Mouse hover olduğunda durur
-      },
-      slidesPerView: 1,
-      pagination: {
-        el: ".swiper-pagination",
-        clickable: true,
-      },
-      navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
-      },
-      scrollbar: {
-        el: ".swiper-scrollbar",
-      },
-    })
-  })
-  /**
-  document.addEventListener("DOMContentLoaded", () => {
-    const slides = document.querySelectorAll("#slides > div")
-    const prevButton = document.getElementById("prev")
-    const nextButton = document.getElementById("next")
-    let currentSlide = 0
-    //@ts-ignore
-    function showSlide(n) {
-      slides.forEach((slide, index) => {
-        //@ts-ignore
-        slide.style.opacity = index === n ? 1 : 0
-      })
+    function showSlide(n: number) {
+      slides.forEach((slide) => {
+        (slide as HTMLElement).style.opacity = "0";
+      });
+      (slides[n] as HTMLElement).style.opacity = "1";
     }
 
     function nextSlide() {
-      currentSlide = (currentSlide + 1) % slides.length
-      showSlide(currentSlide)
+      currentSlide = (currentSlide + 1) % slides.length;
+      showSlide(currentSlide);
     }
 
     function prevSlide() {
-      currentSlide = (currentSlide - 1 + slides.length) % slides.length
-      showSlide(currentSlide)
+      currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+      showSlide(currentSlide);
     }
 
-    showSlide(currentSlide) // İlk slaydı göster
-    //@ts-ignore
-    nextButton.addEventListener("click", nextSlide)
-    //@ts-ignore
-    prevButton.addEventListener("click", prevSlide)
+    showSlide(0);
+    prevButton?.addEventListener("click", prevSlide);
+    nextButton?.addEventListener("click", nextSlide);
 
-    // Otomatik geçiş (isteğe bağlı)
-    setInterval(nextSlide, 5000) // 5 saniyede bir geçiş
-  })
-  */
+    setInterval(nextSlide, 5000);
+  });
 </script>
+
 <style>
-  .swiper-slider,
-  .swiper-slide {
-    height: calc(100vh - 120px);
-  }
-  .swiper-button-prev:after,
-  .swiper-button-next:after {
-    border: 2px solid #006ab3;
-    background-color: white;
-    padding: 1rem;
-  }
-  .swiper-button-prev:hover,
-  .swiper-button-next:hover {
-    border: 2px solid white;
-    background-color: #006ab3;
-  }
   .slider-container {
     position: relative;
     width: 100%;
     overflow: hidden;
-  }
-  .swiper {
-    display: flex;
-  }
-  .swiper-slide {
-    flex: 0 0 auto; /* Slaytların boyutunu korur */
   }
 </style>

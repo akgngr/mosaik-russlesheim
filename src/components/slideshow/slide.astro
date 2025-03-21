@@ -1,5 +1,6 @@
 ---
 import BtnTransparent from "../btn_transparent.astro"
+import { Image } from "astro:assets"
 const { title, desc, img, link, cls } = Astro.props
 ---
 
@@ -7,7 +8,7 @@ const { title, desc, img, link, cls } = Astro.props
   class:list={["absolute w-full h-full transition-opacity duration-500", cls]}
   data-slide="1"
 >
-  <img src={img} alt={title} class="object-cover w-full h-full" />
+  <Image src={img} alt={title} class="object-cover w-full h-full" />
   <div class="absolute inset-0 bg-black opacity-50"></div>
   <div
     class="absolute bottom-0 left-0 p-10 space-y-4 bg-[#676767] w-full h-60 bg-opacity-50 text-white"

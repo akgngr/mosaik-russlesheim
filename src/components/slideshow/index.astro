@@ -49,7 +49,7 @@ interface SlideType {
             desc={slide.description}
             img={urlFor(slide.desktopImage.asset._ref)?.url()}
             link={link}
-            data-slide={index + 1}
+            data-slide={index}
           />
         )
       })
@@ -66,9 +66,9 @@ interface SlideType {
   document.addEventListener("DOMContentLoaded", () => {
     const swiper = new Swiper(".swiper-slider", {
       modules: [Autoplay, Pagination],
-      loop: true,
+      loop: document.querySelectorAll('.swiper-slide').length > 1,
       autoplay: {
-        delay: 5000, // Her 3 saniyede bir geçiş yapar
+        delay: 5000, 
         disableOnInteraction: false, // Kullanıcı etkileşiminden sonra da devam eder
         pauseOnMouseEnter: true, // Mouse hover olduğunda durur
       },

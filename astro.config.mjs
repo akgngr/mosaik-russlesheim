@@ -18,13 +18,6 @@ export default defineConfig({
       hostname: '**.sanity.io',
     }],
   },
-  vite: {
-    resolve: {
-      alias: {
-        'swiper': 'swiper/swiper-bundle.min.js',
-      },
-    },
-  },
   integrations: [
     icon(),
     tailwind(),

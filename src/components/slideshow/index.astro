@@ -32,7 +32,7 @@ interface SlideType {
 }
 ---
 
-<div class="swiper-slider">
+<div class="swiper">
   <div class="swiper-wrapper">
     {
       slides.map((slide: SlideType, index: number) => {
@@ -49,7 +49,7 @@ interface SlideType {
             desc={slide.description}
             img={urlFor(slide.desktopImage.asset._ref)?.url()}
             link={link}
-            data-slide={index}
+            data-slide={index + 1}
           />
         )
       })
@@ -64,7 +64,7 @@ interface SlideType {
   import "swiper/css"
 
   document.addEventListener("DOMContentLoaded", () => {
-    const swiper = new Swiper(".swiper-slider", {
+    const swiper = new Swiper(".swiper", {
       modules: [Autoplay, Pagination],
       loop: document.querySelectorAll('.swiper-slide').length > 1,
       autoplay: {

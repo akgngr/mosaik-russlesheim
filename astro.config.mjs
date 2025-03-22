@@ -6,10 +6,12 @@ import icon from "astro-icon";
 import react from "@astrojs/react";
 import { defineConfig, passthroughImageService } from 'astro/config';
 import netlify from '@astrojs/netlify';
+import sitemap from '@astrojs/sitemap';
 
 dotenv.config();
 
 export default defineConfig({
+  site: 'https://mosaik-russelsheim.de/',
   image: {
     service: passthroughImageService(),
     domains: ["astro.build"],
@@ -19,6 +21,7 @@ export default defineConfig({
     }],
   },
   integrations: [
+    sitemap(),
     icon(),
     tailwind(),
     // 👇 Update these lines

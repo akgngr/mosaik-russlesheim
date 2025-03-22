@@ -20,6 +20,9 @@ importers:
       '@astrojs/react':
         specifier: ^4.1.2
         version: 4.1.2(@types/node@22.10.5)(@types/react-dom@19.0.2(@types/react@18.3.18))(@types/react@18.3.18)(jiti@1.21.7)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(terser@5.37.0)(yaml@2.7.0)
+      '@astrojs/sitemap':
+        specifier: ^3.3.0
+        version: 3.3.0
       '@astrojs/tailwind':
         specifier: ^5.1.4
         version: 5.1.4(astro@5.1.2(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.29.1)(terser@5.37.0)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17)
@@ -50,6 +53,9 @@ importers:
       astro-portabletext:
         specifier: ^0.11.0
         version: 0.11.0(astro@5.1.2(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.29.1)(terser@5.37.0)(typescript@5.7.2)(yaml@2.7.0))
+      astro-seo:
+        specifier: ^0.8.4
+        version: 0.8.4(prettier@3.4.2)(typescript@5.7.2)
       autoprefixer:
         specifier: ^10.4.20
         version: 10.4.20(postcss@8.4.49)
@@ -112,6 +118,12 @@ packages:
   '@asamuzakjp/dom-selector@2.0.2':
     resolution: {integrity: sha512-x1KXOatwofR6ZAYzXRBL5wrdV0vwNxlTCK9NCuLqAzQYARqGcvFwiJA6A1ERuh+dgeA4Dxm3JBYictIes+SqUQ==}
 
+  '@astrojs/check@0.5.10':
+    resolution: {integrity: sha512-vliHXM9cu/viGeKiksUM4mXfO816ohWtawTl2ADPgTsd4nUMjFiyAl7xFZhF34yy4hq4qf7jvK1F2PlR3b5I5w==}
+    hasBin: true
+    peerDependencies:
+      typescript: ^5.0.0
+
   '@astrojs/check@0.9.4':
     resolution: {integrity: sha512-IOheHwCtpUfvogHHsvu0AbeRZEnjJg3MopdLddkJE70mULItS/Vh37BHcI00mcOJcH1vhD3odbpvWokpxam7xA==}
     hasBin: true
@@ -165,6 +177,9 @@ packages:
       '@types/react-dom': ^17.0.17 || ^18.0.6 || ^19.0.0
       react: ^17.0.2 || ^18.0.0 || ^19.0.0
       react-dom: ^17.0.2 || ^18.0.0 || ^19.0.0
+
+  '@astrojs/sitemap@3.3.0':
+    resolution: {integrity: sha512-nYE4lKQtk+Kbrw/w0G0TTgT724co0jUsU4tPlHY9au5HmTBKbwiCLwO/15b1/y13aZ4Kr9ZbMeMHlXuwn0ty4Q==}
 
   '@astrojs/tailwind@5.1.4':
     resolution: {integrity: sha512-EJ3uoTZZr0RYwTrVS2HgYN0+VbXvg7h87AtwpD5OzqS3GyMwRmzfOwHfORTxoWGQRrY9k/Fi+Awk60kwpvRL5Q==}
@@ -1940,6 +1955,9 @@ packages:
   '@types/nlcst@2.0.3':
     resolution: {integrity: sha512-vSYNSDe6Ix3q+6Z7ri9lyWqgGhJTmzRjZRqyq15N0Z/1/UnVsno9G/N40NBijoYx2seFDIl0+B2mgAb9mezUCA==}
 
+  '@types/node@17.0.45':
+    resolution: {integrity: sha512-w+tIMs3rq2afQdsPJlODhoUEKzFP1ayaoyl1CcnwtIlsVe7K7bA1NGm4s3PraqTLlXnbIN84zuBlxBWo1u9BLw==}
+
   '@types/node@22.10.5':
     resolution: {integrity: sha512-F8Q+SeGimwOo86fiovQh8qiXfFEh2/ocYv7tU5pJ3EXMSSxk1Joj5wefpFK2fHTf/N6HKGSxIDBT9f3gCxXPkQ==}
 
@@ -1968,6 +1986,9 @@ packages:
 
   '@types/resolve@1.20.2':
     resolution: {integrity: sha512-60BCwRFOZCQhDncwQdxxeOEEkbc5dIMccYLwbxsS4TUNeVECQ/pBJ0j09mrHOl/JJvpRPGwO9SvE4nR2Nb/a4Q==}
+
+  '@types/sax@1.2.7':
+    resolution: {integrity: sha512-rO73L89PJxeYM3s3pPPjiPgVVcymqU490g0YO5n5By0k2Erzj6tay/4lr1CHAAU4JyOWd1rpQ8bCf6cZfHU96A==}
 
   '@types/shallow-equals@1.0.3':
     resolution: {integrity: sha512-xZx/hZsf1p9J5lGN/nGTsuW/chJCdlyGxilwg1TS78rygBCU5bpY50zZiFcIimlnl0p41kAyaASsy0bqU7WyBA==}
@@ -2227,6 +2248,9 @@ packages:
     resolution: {integrity: sha512-ftCwtR8hUV9/vug46xVFwI9aZTwXi6fREOGo11ogvt/UKDheZcMmiKxBSqh9ABRPVBJf6UkFmKTkbVawnu6gdA==}
     peerDependencies:
       astro: '>=4.6.0'
+
+  astro-seo@0.8.4:
+    resolution: {integrity: sha512-Ou1vzQSXAxa0K8rtNtXNvSpYqOGEgMhh0immMxJeXmbVZac3UKCNWAoXWyOQDFYsZvBugCRSg0N1phBqPMVgCw==}
 
   astro@5.1.2:
     resolution: {integrity: sha512-+U5lXPEJZ6cQx0botGbPhzN6XGWRgDtXgy/RUkpTmUj18LW6pbzYo0O0k3hFWOazlI039bZ+4P2e/oSNlKzm0Q==}
@@ -4910,6 +4934,9 @@ packages:
       react-dom: ^18 || ^19.0.0
       styled-components: ^6.1
 
+  sax@1.4.1:
+    resolution: {integrity: sha512-+aWOz7yVScEGoKNd4PA10LZ8sk0A/z5+nXQG5giUO5rprX9jgYsTdov9qCchZiPIZezbZH+jRut8nPodFAX4Jg==}
+
   saxes@6.0.0:
     resolution: {integrity: sha512-xAg7SOnEhrm5zI3puOOKyy1OMcMlIJZYNJY7xLBwSze0UjhPLnWfj2GF2EpT0jmzaJKIWKHLsaSSajf35bcYnA==}
     engines: {node: '>=v12.22.7'}
@@ -4986,6 +5013,11 @@ packages:
   sisteransi@1.0.5:
     resolution: {integrity: sha512-bLGGlR1QxBcynn2d5YmDX4MGjlZvy2MRBDRNHLJ8VI6l6+9FUiyTFNJ0IveOSP0bcXgVDPRcfGqA0pjaqUpfVg==}
 
+  sitemap@8.0.0:
+    resolution: {integrity: sha512-+AbdxhM9kJsHtruUF39bwS/B0Fytw6Fr1o4ZAIAEqA6cke2xcoO2GleBw9Zw7nRzILVEgz7zBM5GiTJjie1G9A==}
+    engines: {node: '>=14.0.0', npm: '>=6.0.0'}
+    hasBin: true
+
   slash@3.0.0:
     resolution: {integrity: sha512-g9Q1haeby36OSStwb4ntCGGGaKsaVSjQ68fBxoQcutl5fS1vuY18H3wSt3jFyFtrkx+Kz0V1G85A4MyAdDMi2Q==}
     engines: {node: '>=8'}
@@ -5058,6 +5090,9 @@ packages:
 
   stream-each@1.2.3:
     resolution: {integrity: sha512-vlMC2f8I2u/bZGqkdfLQW/13Zihpej/7PmSiMQsbYddxuTsJp8vRe2x2FvVExZg7FaOds43ROAuFJwPR4MTZLw==}
+
+  stream-replace-string@2.0.0:
+    resolution: {integrity: sha512-TlnjJ1C0QrmxRNrON00JvaFFlNh5TTG00APw23j74ET7gkQpTASi6/L2fuiav8pzK715HXtUeClpBTw2NPSn6w==}
 
   stream-shift@1.0.3:
     resolution: {integrity: sha512-76ORR0DO1o1hlKwTbi/DM3EXWGf3ZJYO8cXX5RJwnul2DEg2oyoZyjLNoQM8WsvZiFKCRfC1O0J7iCvie3RZmQ==}
@@ -5997,6 +6032,9 @@ packages:
   zod@3.24.1:
     resolution: {integrity: sha512-muH7gBL9sI1nciMZV67X5fTKKBLtwpZ5VBp1vsOQzj1MhrBZ4wlVCm3gedKZWLp0Oyel8sIGfeiz54Su+OVT+A==}
 
+  zod@3.24.2:
+    resolution: {integrity: sha512-lY7CDW43ECgW9u1TcT3IoXHflywfVqDYze4waEz812jR/bZ8FHDsl7pFQoSZTz5N+2NqRXs8GBwnAwo3ZNxqhQ==}
+
   zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
 
@@ -6044,6 +6082,18 @@ snapshots:
       bidi-js: 1.0.3
       css-tree: 2.3.1
       is-potential-custom-element-name: 1.0.1
+
+  '@astrojs/check@0.5.10(prettier@3.4.2)(typescript@5.7.2)':
+    dependencies:
+      '@astrojs/language-server': 2.15.4(prettier@3.4.2)(typescript@5.7.2)
+      chokidar: 3.6.0
+      fast-glob: 3.3.2
+      kleur: 4.1.5
+      typescript: 5.7.2
+      yargs: 17.7.2
+    transitivePeerDependencies:
+      - prettier
+      - prettier-plugin-astro
 
   '@astrojs/check@0.9.4(prettier@3.4.2)(typescript@5.7.2)':
     dependencies:
@@ -6181,6 +6231,12 @@ snapshots:
       - terser
       - tsx
       - yaml
+
+  '@astrojs/sitemap@3.3.0':
+    dependencies:
+      sitemap: 8.0.0
+      stream-replace-string: 2.0.0
+      zod: 3.24.2
 
   '@astrojs/tailwind@5.1.4(astro@5.1.2(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.29.1)(terser@5.37.0)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17)':
     dependencies:
@@ -8297,6 +8353,8 @@ snapshots:
     dependencies:
       '@types/unist': 3.0.3
 
+  '@types/node@17.0.45': {}
+
   '@types/node@22.10.5':
     dependencies:
       undici-types: 6.20.0
@@ -8325,6 +8383,10 @@ snapshots:
       csstype: 3.1.3
 
   '@types/resolve@1.20.2': {}
+
+  '@types/sax@1.2.7':
+    dependencies:
+      '@types/node': 22.10.5
 
   '@types/shallow-equals@1.0.3': {}
 
@@ -8608,6 +8670,14 @@ snapshots:
       '@portabletext/toolkit': 2.0.16
       '@portabletext/types': 2.0.13
       astro: 5.1.2(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.29.1)(terser@5.37.0)(typescript@5.7.2)(yaml@2.7.0)
+
+  astro-seo@0.8.4(prettier@3.4.2)(typescript@5.7.2):
+    dependencies:
+      '@astrojs/check': 0.5.10(prettier@3.4.2)(typescript@5.7.2)
+    transitivePeerDependencies:
+      - prettier
+      - prettier-plugin-astro
+      - typescript
 
   astro@5.1.2(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.29.1)(terser@5.37.0)(typescript@5.7.2)(yaml@2.7.0):
     dependencies:
@@ -12028,6 +12098,8 @@ snapshots:
       - terser
       - utf-8-validate
 
+  sax@1.4.1: {}
+
   saxes@6.0.0:
     dependencies:
       xmlchars: 2.2.0
@@ -12121,6 +12193,13 @@ snapshots:
 
   sisteransi@1.0.5: {}
 
+  sitemap@8.0.0:
+    dependencies:
+      '@types/node': 17.0.45
+      '@types/sax': 1.2.7
+      arg: 5.0.2
+      sax: 1.4.1
+
   slash@3.0.0: {}
 
   slate-dom@0.111.0(slate@0.112.0):
@@ -12197,6 +12276,8 @@ snapshots:
     dependencies:
       end-of-stream: 1.4.4
       stream-shift: 1.0.3
+
+  stream-replace-string@2.0.0: {}
 
   stream-shift@1.0.3: {}
 
@@ -13059,5 +13140,7 @@ snapshots:
       zod: 3.24.1
 
   zod@3.24.1: {}
+
+  zod@3.24.2: {}
 
   zwitch@2.0.4: {}
